@@ -1,11 +1,45 @@
-﻿using System;
+﻿// ***
+// *** Copyright (C) 2013, Daniel M. Porrey.  All rights reserved.
+// *** Written By Daniel M. Porrey
+// ***
+// *** This software is provided "AS IS," without a warranty of any kind. ALL EXPRESS OR IMPLIED CONDITIONS, REPRESENTATIONS AND WARRANTIES, 
+// *** INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT, ARE HEREBY EXCLUDED. DANIEL M PORREY 
+// *** AND ITS LICENSORS SHALL NOT BE LIABLE FOR ANY DAMAGES SUFFERED BY LICENSEE AS A RESULT OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE 
+// *** OR ITS DERIVATIVES. IN NO EVENT WILL DANIEL M PORREY OR ITS LICENSORS BE LIABLE FOR ANY LOST REVENUE, PROFIT OR DATA, OR FOR DIRECT, INDIRECT, 
+// *** SPECIAL, CONSEQUENTIAL, INCIDENTAL OR PUNITIVE DAMAGES, HOWEVER CAUSED AND REGARDLESS OF THE THEORY OF LIABILITY, ARISING OUT OF THE USE OF 
+// *** OR INABILITY TO USE THIS SOFTWARE, EVEN IF DANIEL M PORREY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. 
+// ***
+// *** Licensed under Microsoft Reciprocal License (Ms-RL)
+// *** This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, 
+// *** do not use the software. Full license details can be found at https://solarcalculator.codeplex.com/license.
+// ***
+using System;
 
 namespace Innovative.SolarCalculator
 {
+    /// <summary>
+    /// Provides mathmatical operations to calculate the sunrise and sunset for a given date.
+    /// </summary>
 	public class SolarTimes
 	{
 		private DateTime _forDate = DateTime.MinValue;
 		private double _atmosphericRefraction = .833;
+
+        /// <summary>
+        /// Creates a default instance of the SolarTimes object.
+        /// </summary>
+        public SolarTimes()
+        {
+        }
+
+        /// <summary>
+        /// Creates an instance of the SolarTimes objectwith the specified ForDate.
+        /// </summary>
+        /// <param name="forDate"></param>
+        public SolarTimes(DateTime forDate)
+        {
+            this.ForDate = forDate;
+        }
 
 		/// <summary>
 		/// Specifies the Date for which the sunrise and sunset will be calculated.
@@ -114,7 +148,7 @@ namespace Innovative.SolarCalculator
 		/// A radian is the measure of a central angle subtending an arc equal in length to the radius. This method 
 		/// converts an angle measured in degrees to radian units.
 		/// </summary>
-		/// <param name="radians">The angle in degree units</param>
+        /// <param name="degrees">The angle in degree units</param>
 		/// <returns>The angle in radian units</returns>
 		public double ToRadians(double degrees)
 		{
@@ -304,10 +338,10 @@ namespace Innovative.SolarCalculator
 			}
 		}
 
-		/// <summary>
-		/// Obliq Corr (degrees)
-		/// <para>(Spreadsheet Column R)
-		/// </summary>
+        /// <summary>
+        /// Obliq Corr (degrees)
+        /// (Spreadsheet Column R)
+        /// </summary>
 		public double ObliqCorr
 		{
 			get

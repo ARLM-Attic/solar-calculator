@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="SolarCalculator.1.0.1.nupkg" />
+    <None Include="SolarCalculator.1.0.2.nupkg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtensions.cs" />

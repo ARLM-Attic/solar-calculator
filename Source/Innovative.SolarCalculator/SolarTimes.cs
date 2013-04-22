@@ -18,7 +18,7 @@ using System;
 namespace Innovative.SolarCalculator
 {
     /// <summary>
-    /// Provides mathmatical operations to calculate the sunrise and sunset for a given date.
+    /// Provides mathematical operations to calculate the sunrise and sunset for a given date.
     /// </summary>
 	public class SolarTimes
 	{
@@ -33,7 +33,7 @@ namespace Innovative.SolarCalculator
         }
 
         /// <summary>
-        /// Creates an instance of the SolarTimes objectwith the specified ForDate.
+        /// Creates an instance of the SolarTimes object with the specified ForDate.
         /// </summary>
         /// <param name="forDate"></param>
         public SolarTimes(DateTime forDate)
@@ -65,7 +65,7 @@ namespace Innovative.SolarCalculator
 		/// around +/- 180° longitude. (180° east longitude is the same as 180° west longitude, because 
 		/// there are 360° in a circle.) Many astronomers define east longitude as positive. For our new 
 		/// solar calculator, we conform to the international standard, with east longitude positive.
-		/// <para>(Spreadsheet Column B, Row 4)</para>
+		/// (Spreadsheet Column B, Row 4)
 		/// </summary>
 		public double Longitude { get; set; }
 
@@ -74,7 +74,7 @@ namespace Innovative.SolarCalculator
 		/// south (at the south pole), through 0° (all along the equator), to 90° north (at the north pole). 
 		/// Latitude is usually defined as a positive value in the northern hemisphere and a negative value 
 		/// in the southern hemisphere.
-		/// <para>(Spreadsheet Column B, Row 3)</para>
+		/// (Spreadsheet Column B, Row 3)
 		/// </summary>
 		public double Latitude { get; set; }
 
@@ -83,7 +83,7 @@ namespace Innovative.SolarCalculator
 		/// Time Zones are longitudinally defined regions on the Earth that keep a common time. A time 
 		/// zone generally spans 15° of longitude, and is defined by its offset (in hours) from UTC. 
 		/// For example, Mountain Standard Time (MST) in the US is 7 hours behind UTC (MST = UTC - 7).
-		/// <para>(Spreadsheet Column B, Row 5)</para>
+		/// (Spreadsheet Column B, Row 5)
 		/// </summary>
 		public double TimeZoneOffset
 		{
@@ -95,7 +95,7 @@ namespace Innovative.SolarCalculator
 
 		/// <summary>
 		/// Sun Rise Time  
-		/// <para>(Spreadsheet Column Y)</para>
+		/// (Spreadsheet Column Y)
 		/// </summary>
 		public DateTime Sunrise
 		{
@@ -111,8 +111,8 @@ namespace Innovative.SolarCalculator
 		}
 
 		/// <summary>
-		/// Sun Rise Time
-		/// <para>(Spreadsheet Column Z)</para>
+		/// Sun Set Time
+		/// (Spreadsheet Column Z)
 		/// </summary>
 		public DateTime Sunset
 		{
@@ -164,7 +164,7 @@ namespace Innovative.SolarCalculator
 
 		///// <summary>
 		///// Time past local midnight.
-		///// <para>(Spreadsheet Column E)</para>
+		///// (Spreadsheet Column E)
 		///// </summary>	
 		//public double TimePastLocalMidnight
 		//{
@@ -187,7 +187,7 @@ namespace Innovative.SolarCalculator
 		/// since 1 January, 4713 BCE (Before Common Era), with the first day defined as Julian 
 		/// day zero. The Julian day begins at noon UTC. Some scientists use the term Julian day 
 		/// to mean the numerical day of the current year, where January 1 is defined as day 001. 
-		/// <para>(Spreadsheet Column F)</para>
+		/// (Spreadsheet Column F)
 		/// </summary>
 		public double JulianDay
 		{
@@ -210,7 +210,7 @@ namespace Innovative.SolarCalculator
 		/// except for leap years which have 366, and occurred every 4 years. This calendar was reformed 
 		/// by Pope Gregory XIII into the Gregorian calendar, which further refined leap years and corrected 
 		/// for past errors by skipping 10 days in October of 1582. 
-		/// <para>(Spreadsheet Column G)</para>
+		/// (Spreadsheet Column G)
 		/// </summary>
 		public double JulianCentury
 		{
@@ -226,7 +226,7 @@ namespace Innovative.SolarCalculator
 
 		/// <summary>
 		/// Sun's Geometric Mean Longitude (degrees): Geometric Mean Ecliptic Longitude of Sun.
-		/// <para>(Spreadsheet Column I)</para>
+		/// (Spreadsheet Column I)
 		/// </summary>
 		public double SunGeometricMeanLongitude
 		{
@@ -242,7 +242,7 @@ namespace Innovative.SolarCalculator
 
 		/// <summary>
 		/// Sun's Mean Anomaly (degrees): Position of Sun relative to perigee
-		/// <para>(Spreadsheet Column J)</para>
+		/// (Spreadsheet Column J)
 		/// </summary>
 		public double SunMeanAnomaly
 		{
@@ -260,7 +260,7 @@ namespace Innovative.SolarCalculator
 		/// Eccentricity of the Earth's Orbit: Eccentricity e is the ratio of half the distance between the foci c to
 		/// the semi-major axis a: e = c / a. For example, an orbit with e = 0 is circular, e = 1 is parabolic, and e 
 		/// between 0 and 1 is elliptic.
-		/// <para>(Spreadsheet Column K)</para>
+		/// (Spreadsheet Column K)
 		/// </summary>
 		public double EccentricityOfEarthOrbit
 		{
@@ -276,7 +276,7 @@ namespace Innovative.SolarCalculator
 
 		/// <summary>
 		/// Sun Equation of the Center: Difference between mean anomaly and true anomaly.
-		/// <para>(Spreadsheet Column L)</para>
+		/// (Spreadsheet Column L)
 		/// </summary>
 		public double SunEquationOfCenter
 		{
@@ -291,8 +291,8 @@ namespace Innovative.SolarCalculator
 		}
 
 		/// <summary>
-		/// Sun True Long (deg)
-		/// <para>(Spreadsheet Column M)</para>
+		/// Sun True Long (degrees)
+		/// (Spreadsheet Column M)
 		/// </summary>
 		public double SunTrueLongitude
 		{
@@ -308,7 +308,7 @@ namespace Innovative.SolarCalculator
 
 		/// <summary>
 		/// Sun Apparent Longitude (deg)
-		/// <para>(Spreadsheet Column P)</para>
+		/// (Spreadsheet Column P)
 		/// </summary>
 		public double SunApparentLongitude
 		{
@@ -324,7 +324,7 @@ namespace Innovative.SolarCalculator
 
 		/// <summary>
 		/// Mean Ecliptic Obliquity (degrees): Inclination of ecliptic plane w.r.t. celestial equator
-		/// <para>(Spreadsheet Column Q)</para>
+		/// (Spreadsheet Column Q)
 		/// </summary>
 		public double MeanEclipticObliquity
 		{
@@ -358,7 +358,7 @@ namespace Innovative.SolarCalculator
 		/// Solar Declination (Degrees): The measure of how many degrees North (positive) or South (negative) 
 		/// of the equator that the sun is when viewed from the centre of the earth.  This varies from 
 		/// approximately +23.5 (North) in June to -23.5 (South) in December.
-		/// <para>(Spreadsheet Column T)</para>
+		/// (Spreadsheet Column T)
 		/// </summary>
 		public double SolarDeclination
 		{
@@ -373,8 +373,8 @@ namespace Innovative.SolarCalculator
 		}
 
 		/// <summary>
-		/// var y
-		/// <para>(Spreadsheet Column U)</para>
+		/// Var Y
+		/// (Spreadsheet Column U)
 		/// </summary>
 		public double VarY
 		{
@@ -392,7 +392,7 @@ namespace Innovative.SolarCalculator
 		/// Equation of Time (minutes)
 		/// Accounts for changes in the time of solar noon for a given location over the course of a year. Earth's 
 		/// elliptical orbit and Kepler's law of equal areas in equal times are the culprits behind this phenomenon.
-		/// <para>(Spreadsheet Column V)</para>
+		/// (Spreadsheet Column V)
 		/// </summary>
 		public double EquationOfTime
 		{
@@ -408,7 +408,7 @@ namespace Innovative.SolarCalculator
 
 		/// <summary>
 		/// HA Sunrise (degrees)
-		/// <para>(Spreadsheet Column W)</para>
+		/// (Spreadsheet Column W)
 		/// </summary>
 		public double HaSunrise
 		{
@@ -427,7 +427,7 @@ namespace Innovative.SolarCalculator
 		/// Defined for a given day for a specific longitude, it is the time when the sun crosses the meridian of 
 		/// the observer's location. At solar noon, a shadow cast by a vertical pole will point either directly 
 		/// north or directly south, depending on the observer's latitude and the time of year. 
-		/// <para>(Spreadsheet Column X)</para>
+		/// (Spreadsheet Column X)
 		/// </summary>
 		public DateTime SolarNoon
 		{
@@ -444,7 +444,7 @@ namespace Innovative.SolarCalculator
 
 		/// <summary>
 		/// Sunlight Duration: The amount of time the sun is visible during the specified day.
-		/// <para>(Spreadsheet Column AA)</para>
+		/// (Spreadsheet Column AA)
 		/// </summary>
 		public TimeSpan SunlightDuration
 		{

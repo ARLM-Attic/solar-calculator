@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator", "Innovative.SolarCalculator\Innovative.SolarCalculator.csproj", "{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Tests", "Innovative.SolarCalculator.Tests\Innovative.SolarCalculator.Tests.csproj", "{C07CE1CD-32DE-4567-BD96-FE385E1304DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo Console", "Demo Console\Demo Console.csproj", "{9B942A63-80ED-4340-A4FA-264012B91F4C}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs35
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Demo\u0020Console\\Demo\u0020Console.csproj
+		SccProjectName1 = Demo\u0020Console
+		SccLocalPath1 = Demo\u0020Console
+		SccProjectUniqueName2 = Innovative.SolarCalculator.Tests\\Innovative.SolarCalculator.Tests.csproj
+		SccProjectName2 = Innovative.SolarCalculator.Tests
+		SccLocalPath2 = Innovative.SolarCalculator.Tests
+		SccProjectUniqueName3 = Innovative.SolarCalculator\\Innovative.SolarCalculator.csproj
+		SccProjectName3 = Innovative.SolarCalculator
+		SccLocalPath3 = Innovative.SolarCalculator
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -39,7 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="NOAA_Solar_Calculations_day.xls" />
     <None Include="SolarCalculator.1.0.1.nupkg" />
   </ItemGroup>
   <ItemGroup>

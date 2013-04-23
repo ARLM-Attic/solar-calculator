@@ -285,7 +285,7 @@ namespace Innovative.SolarCalculator.Tests
 				double expectedValue = item.Field<double>("ObliqCorr");
 
 				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
-				double actualValue = TestDirector.SolarTimesInstance.ObliqCorr;
+				double actualValue = TestDirector.SolarTimesInstance.ObliquityCorrection;
 				double difference = expectedValue - actualValue;
 
 				Assert.AreEqual(expectedValue, actualValue, TestDirector.DoubleDelta, string.Format("The Obliq Corr (Column R) calculation does not match Excel. The difference is {0}", difference));
@@ -353,7 +353,7 @@ namespace Innovative.SolarCalculator.Tests
 				double expectedValue = item.Field<double>("HaSunrise");
 
 				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
-				double actualValue = TestDirector.SolarTimesInstance.HaSunrise;
+				double actualValue = TestDirector.SolarTimesInstance.HourAngleSunrise;
 				double difference = expectedValue - actualValue;
 
 				Assert.AreEqual(expectedValue, actualValue, TestDirector.DoubleDelta, string.Format("The HA Sunrise (Column W) calculation does not match Excel. The difference is {0}", difference));

@@ -22,8 +22,13 @@ namespace Innovative.SolarCalculator
     /// </summary>
 	public class SolarTimes
 	{
+		/// <summary>
+		/// Math.PI is carried to five decimal places. We are using fifteen paces (the rest here is just for fun).
+		/// </summary>		
+		public static double Pi = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679;
+
 		private DateTime _forDate = DateTime.MinValue;
-		private double _atmosphericRefraction = .833;
+		private double _atmosphericRefraction = .83333;
 
         /// <summary>
         /// Creates a default instance of the SolarTimes object.
@@ -103,7 +108,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HaSunrise * 4.0 / 1440.0;
+				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4.0 / 1440.0;
 				returnValue = this.ForDate.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -120,7 +125,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HaSunrise * 4.0 / 1440.0;
+				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4.0 / 1440.0;
 				returnValue = this.ForDate.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -139,7 +144,7 @@ namespace Innovative.SolarCalculator
 			// ***
 			// *** Factor = 180 / pi 
 			// ***
-			returnValue = radians * (180.0 / Math.PI);
+			returnValue = radians * (180.0 / SolarTimes.Pi);
 
 			return returnValue;
 		}
@@ -157,7 +162,7 @@ namespace Innovative.SolarCalculator
 			// ***
 			// *** Factor = pi / 180 
 			// ***
-			returnValue = (degrees * Math.PI) / 180.0;
+			returnValue = (degrees * SolarTimes.Pi) / 180.0;
 
 			return returnValue;
 		}
@@ -342,7 +347,7 @@ namespace Innovative.SolarCalculator
         /// Obliq Corr (degrees)
         /// (Spreadsheet Column R)
         /// </summary>
-		public double ObliqCorr
+		public double ObliquityCorrection
 		{
 			get
 			{
@@ -366,7 +371,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = this.ToDegrees(Math.Asin(Math.Sin(this.ToRadians(this.ObliqCorr)) * Math.Sin(this.ToRadians(this.SunApparentLongitude))));
+				returnValue = this.ToDegrees(Math.Asin(Math.Sin(this.ToRadians(this.ObliquityCorrection)) * Math.Sin(this.ToRadians(this.SunApparentLongitude))));
 
 				return returnValue;
 			}
@@ -382,7 +387,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = Math.Tan(this.ToRadians(this.ObliqCorr / 2.0)) * Math.Tan(this.ToRadians(this.ObliqCorr / 2.0));
+				returnValue = Math.Tan(this.ToRadians(this.ObliquityCorrection / 2.0)) * Math.Tan(this.ToRadians(this.ObliquityCorrection / 2.0));
 
 				return returnValue;
 			}
@@ -410,7 +415,7 @@ namespace Innovative.SolarCalculator
 		/// HA Sunrise (degrees)
 		/// (Spreadsheet Column W)
 		/// </summary>
-		public double HaSunrise
+		public double HourAngleSunrise
 		{
 			get
 			{
@@ -452,7 +457,7 @@ namespace Innovative.SolarCalculator
 			{
 				TimeSpan returnValue = TimeSpan.Zero;
 
-				returnValue = TimeSpan.FromMinutes(8.0 * this.HaSunrise);
+				returnValue = TimeSpan.FromMinutes(8.0 * this.HourAngleSunrise);
 
 				return returnValue;
 			}

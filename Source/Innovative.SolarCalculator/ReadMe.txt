@@ -19,3 +19,10 @@ http://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html
 
 Solar Calculator Glossary
 http://www.esrl.noaa.gov/gmd/grad/solcalc/glossary.html#atmosphericrefraction
+
+More information about the calculations can be found at
+http://www.nefsc.noaa.gov/AstroCalc4R/
+
+The calculations are based on the book
+"Astronomical Algorithms"
+Jean Meeus (Author) 

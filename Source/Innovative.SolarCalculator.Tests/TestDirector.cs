@@ -30,14 +30,39 @@ namespace Innovative.SolarCalculator.Tests
 
         /// <summary>
         /// Specifies the precision when comparing data values of type double
+        /// for math comparison tests.
         /// </summary>
-		public static double DoubleDelta
+		public static double MathDoubleDelta
 		{
 			get
 			{
-				return 0.0000000000000009;
+				return 0.000000000001;
 			}
 		}
+
+        /// <summary>
+        /// Specifies the precision when comparing data values of type double
+        /// for Excel comparison tests.
+        /// </summary>
+        public static double ExcelDoubleDelta
+        {
+            get
+            {
+                return 0.000000000001;
+            }
+        }
+
+        /// <summary>
+        /// Specifies the precision when comparing data values of type double
+        /// for solar comparison tests.
+        /// </summary>
+        public static double SolarDoubleDelta
+        {
+            get
+            {
+                return 0.00000000001;
+            }
+        }
 
         /// <summary>
         /// Creates a SolarTimes instance for use in test cases.

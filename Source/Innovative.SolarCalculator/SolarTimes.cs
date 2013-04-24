@@ -421,7 +421,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = this.ToDegrees(Math.Acos(Math.Cos(this.ToRadians((90 + this.AtmosphericRefraction))) / (Math.Cos(this.ToRadians(this.Latitude)) * Math.Cos(this.ToRadians(this.SolarDeclination))) - Math.Tan(this.ToRadians(this.Latitude)) * Math.Tan(this.ToRadians(this.SolarDeclination))));
+				returnValue = this.ToDegrees(Math.Acos(Math.Cos(this.ToRadians((90.0 + this.AtmosphericRefraction))) / (Math.Cos(this.ToRadians(this.Latitude)) * Math.Cos(this.ToRadians(this.SolarDeclination))) - Math.Tan(this.ToRadians(this.Latitude)) * Math.Tan(this.ToRadians(this.SolarDeclination))));
 
 				return returnValue;
 			}

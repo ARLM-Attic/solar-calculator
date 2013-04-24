@@ -35,12 +35,13 @@ namespace Innovative.SolarCalculator
         /// </summary>
         public SolarTimes()
         {
+			this.ForDate = DateTime.Now;
         }
 
         /// <summary>
         /// Creates an instance of the SolarTimes object with the specified ForDate.
         /// </summary>
-        /// <param name="forDate"></param>
+		/// <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
         public SolarTimes(DateTime forDate)
         {
             this.ForDate = forDate;
@@ -57,9 +58,6 @@ namespace Innovative.SolarCalculator
 			}
 			set
 			{
-				// ***
-				// *** Exclude the time portion
-				// ***
 				_forDate = value;
 			}
 		}
@@ -94,7 +92,7 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				return TimeZoneInfo.Local.GetUtcOffset(this.ForDate).TotalHours;
+				return TimeZoneInfo.Local.GetUtcOffset(this.ForDate.Date).TotalHours;
 			}
 		}
 
@@ -109,7 +107,7 @@ namespace Innovative.SolarCalculator
 				DateTime returnValue = DateTime.MinValue;
 
 				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4.0 / 1440.0;
-				returnValue = this.ForDate.Add(TimeSpan.FromDays(dayFraction));
+				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
 			}
@@ -126,7 +124,7 @@ namespace Innovative.SolarCalculator
 				DateTime returnValue = DateTime.MinValue;
 
 				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4.0 / 1440.0;
-				returnValue = this.ForDate.Add(TimeSpan.FromDays(dayFraction));
+				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
 			}
@@ -203,7 +201,7 @@ namespace Innovative.SolarCalculator
 				// ***
 				// *** this.TimePastLocalMidnight was removed since the time is in ForDate
 				// ***
-				returnValue = this.ForDate.ToExcelDateValue() + 2415018.5 - (this.TimeZoneOffset / 24.0);
+				returnValue = this.ForDate.Date.ToExcelDateValue() + 2415018.5 - (this.TimeZoneOffset / 24.0);
 
 				return returnValue;
 			}
@@ -344,7 +342,7 @@ namespace Innovative.SolarCalculator
 		}
 
         /// <summary>
-        /// Obliq Corr (degrees)
+		/// Obliquity Correction (degrees)
         /// (Spreadsheet Column R)
         /// </summary>
 		public double ObliquityCorrection

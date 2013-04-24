@@ -36,7 +36,7 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			get
 			{
-				return 0.000000000001;
+				return 0.000000000000001;
 			}
 		}
 
@@ -48,7 +48,7 @@ namespace Innovative.SolarCalculator.Tests
         {
             get
             {
-                return 0.000000000001;
+				return 0.000000000000001;
             }
         }
 
@@ -60,9 +60,21 @@ namespace Innovative.SolarCalculator.Tests
         {
             get
             {
-                return 0.00000000001;
+				return 0.09;
             }
         }
+
+		/// <summary>
+		/// Specifies the number of seconds allowed for variation in a
+		/// TimeSpan comparison test.
+		/// </summary>
+		public static double TimeSpanDoubleDelta
+		{
+			get
+			{
+				return 1.0;
+			}
+		}
 
         /// <summary>
         /// Creates a SolarTimes instance for use in test cases.
@@ -83,7 +95,7 @@ namespace Innovative.SolarCalculator.Tests
         }
 
         /// <summary>
-        /// Gets the test data required for the mathmatical tests.
+        /// Gets the test data required for the mathematical tests.
         /// </summary>
 		public static IEnumerable<DataRow> MathTestData
 		{

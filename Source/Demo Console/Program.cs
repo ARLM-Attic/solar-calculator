@@ -25,9 +25,25 @@ namespace Demo_Console
 	{
 		static void Main(string[] args)
 		{
-			SolarTimes solarTimes = new SolarTimes();
-			solarTimes.Latitude = 41.6;
-			solarTimes.Longitude = -88;
+			SolarTimes solarTimes = new SolarTimes(DateTime.Now);
+
+			string daylightName = TimeZoneInfo.Local.DaylightName;
+			bool isSavings = TimeZoneInfo.Local.IsDaylightSavingTime(DateTime.Now);
+			double offset = TimeZoneInfo.Local.GetUtcOffset(DateTime.Now).TotalHours;
+			TimeZoneInfo.AdjustmentRule[] rules = TimeZoneInfo.Local.GetAdjustmentRules();
+
+			// ***
+			// *** Geo coordinates
+			// ***
+			solarTimes.Latitude = 41.6042880444544;
+			solarTimes.Longitude = -88.03034663200378;
+
+			// ***
+			// *** Display the sunrise and sunset
+			// ***
+			Console.WriteLine("Sunrise is at {0} on {1}.", solarTimes.Sunrise.ToLongTimeString(), solarTimes.Sunrise.ToLongDateString());
+			Console.WriteLine("Sunset is at {0} on {1}.", solarTimes.Sunset.ToLongTimeString(), solarTimes.Sunset.ToLongDateString());
+			Console.WriteLine("The amount of sunlight on {0} is {1} hours, {2} minutes and {3} seconds.", solarTimes.ForDate.ToLongDateString(), solarTimes.SunlightDuration.Hours, solarTimes.SunlightDuration.Minutes, solarTimes.SunlightDuration.Seconds);
 		}
 	}
 }

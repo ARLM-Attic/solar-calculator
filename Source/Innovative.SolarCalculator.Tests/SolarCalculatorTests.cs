@@ -51,7 +51,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = Math.Sin(value1);
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("SIN calculation in C# does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("SIN calculation in C# does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -67,7 +67,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = Math.Asin(sin);
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("ASIN calculation in C# does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("ASIN calculation in C# does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -83,7 +83,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = Math.Cos(value1);
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("COS calculation in C# does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("COS calculation in C# does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -100,7 +100,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = Math.Acos(cos);
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("ACOS calculation in C# does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("ACOS calculation in C# does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -116,7 +116,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = Math.Tan(value1);
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("TAN calculation in C# does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("TAN calculation in C# does not match Excel. The difference is {0}", difference));
 			}
 		}
 		#endregion
@@ -152,7 +152,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.JulianCentury;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The JulianCentury (Column G)calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The JulianCentury (Column G)calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -169,7 +169,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.SunGeometricMeanLongitude;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Century (Column I) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Century (Column I) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -186,7 +186,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.SunMeanAnomaly;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Mean Anomaly (Column J) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Mean Anomaly (Column J) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -203,7 +203,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.EccentricityOfEarthOrbit;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Eccentricity Of Earth Orbit (Column K) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Eccentricity Of Earth Orbit (Column K) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -220,7 +220,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.SunEquationOfCenter;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column L) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column L) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -237,7 +237,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.SunTrueLongitude;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun True Longitude (Column M) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun True Longitude (Column M) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -254,7 +254,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.SunApparentLongitude;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Apparent Longitude (Column P) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Apparent Longitude (Column P) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -271,12 +271,12 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.MeanEclipticObliquity;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Mean Ecliptic Obliquity (Column Q) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Mean Ecliptic Obliquity (Column Q) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
 		[TestMethod]
-		public void ObliqCorrComparisonTest()
+		public void ObliquityCorrectionComparisonTest()
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
@@ -288,7 +288,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.ObliquityCorrection;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Obliq Corr (Column R) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Obliquity Correction (Column R) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -305,7 +305,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.SolarDeclination;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Solar Declination (Column T) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Solar Declination (Column T) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -322,7 +322,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.VarY;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Var Y (Column U) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Var Y (Column U) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -339,7 +339,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.EquationOfTime;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column V) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column V) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -356,7 +356,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.HourAngleSunrise;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Hour Angle Sunrise (Column W) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Hour Angle Sunrise (Column W) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -371,9 +371,12 @@ namespace Innovative.SolarCalculator.Tests
 
 				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
 				DateTime actualValue = TestDirector.SolarTimesInstance.SolarNoon;
-				TimeSpan difference = expectedValue.Subtract(actualValue);
+				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
 
-				Assert.AreEqual(expectedValue.TimeOfDay, actualValue.TimeOfDay, string.Format("The Solar Noon (Column X) calculation does not match Excel. The difference is {0}", difference));
+				if (difference > TestDirector.TimeSpanDoubleDelta)
+				{
+					Assert.Fail(string.Format("The Solar Noon (Column X) calculation does not match Excel. The difference is {0}", difference));
+				}
 			}
 		}
 
@@ -388,9 +391,12 @@ namespace Innovative.SolarCalculator.Tests
 
 				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
 				DateTime actualValue = TestDirector.SolarTimesInstance.Sunrise;
-				TimeSpan difference = expectedValue.Subtract(actualValue);
+				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
 
-				Assert.AreEqual(expectedValue.TimeOfDay, actualValue.TimeOfDay, string.Format("The Sunrise (Column Y) calculation does not match Excel. The difference is {0}", difference));
+				if (difference > TestDirector.TimeSpanDoubleDelta)
+				{
+					Assert.Fail(string.Format("The Sunrise (Column Y) calculation does not match Excel. The difference is {0}", difference));
+				}
 			}
 		}
 
@@ -405,9 +411,12 @@ namespace Innovative.SolarCalculator.Tests
 
 				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
 				DateTime actualValue = TestDirector.SolarTimesInstance.Sunset;
-				TimeSpan difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay);
+				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
 
-				Assert.AreEqual(expectedValue.TimeOfDay, actualValue.TimeOfDay, string.Format("The Sunset (Column Z) calculation does not match Excel. The difference is {0}", difference));
+				if (difference > TestDirector.TimeSpanDoubleDelta)
+				{
+					Assert.Fail(string.Format("The Sunset (Column Z) calculation does not match Excel. The difference is {0}", difference));
+				}
 			}
 		}
 
@@ -420,11 +429,11 @@ namespace Innovative.SolarCalculator.Tests
 				DateTime time = item.Field<DateTime>("Time");
 				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
 
-				double expectedValue = item.Field<double>("SunlightDuration");				
+				double expectedValue = item.Field<double>("SunlightDuration");
 				double actualValue = TestDirector.SolarTimesInstance.SunlightDuration.TotalMinutes;
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sunlight Duration (Column AA) calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sunlight Duration (Column AA) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 		#endregion
@@ -456,7 +465,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.ToRadians(value1);
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToRadians() does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToRadians() does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -471,7 +480,7 @@ namespace Innovative.SolarCalculator.Tests
 				double actualValue = TestDirector.SolarTimesInstance.ToDegrees(radians);
 				double difference = expectedValue - actualValue;
 
-                Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToDegrees() does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToDegrees() does not match Excel. The difference is {0}", difference));
 			}
 		}
 		#endregion

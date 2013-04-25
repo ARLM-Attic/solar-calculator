@@ -17,6 +17,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Innovative.SolarCalculator.Tests
 {
@@ -127,15 +128,19 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("JulianDay");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.JulianDay;
 				double difference = expectedValue - actualValue;
 
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Date (Column F)calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Date (Column F) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -144,15 +149,19 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("JulianCentury");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.JulianCentury;
 				double difference = expectedValue - actualValue;
 
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The JulianCentury (Column G)calculation does not match Excel. The difference is {0}", difference));
+				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The JulianCentury (Column G) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
@@ -161,11 +170,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);				
 				double expectedValue = item.Field<double>("GeomMeanLongSun");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.SunGeometricMeanLongitude;
 				double difference = expectedValue - actualValue;
 
@@ -178,11 +191,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("GeomMeanAnomSun");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.SunMeanAnomaly;
 				double difference = expectedValue - actualValue;
 
@@ -195,11 +212,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("EccentEarthOrbit");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.EccentricityOfEarthOrbit;
 				double difference = expectedValue - actualValue;
 
@@ -212,11 +233,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("SunEqofCtr");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.SunEquationOfCenter;
 				double difference = expectedValue - actualValue;
 
@@ -229,11 +254,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("SunTrueLong");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.SunTrueLongitude;
 				double difference = expectedValue - actualValue;
 
@@ -246,11 +275,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("SunAppLong");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.SunApparentLongitude;
 				double difference = expectedValue - actualValue;
 
@@ -263,11 +296,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("MeanObliqEcliptic");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.MeanEclipticObliquity;
 				double difference = expectedValue - actualValue;
 
@@ -280,11 +317,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("ObliqCorr");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.ObliquityCorrection;
 				double difference = expectedValue - actualValue;
 
@@ -297,11 +338,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("SunDeclin");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.SolarDeclination;
 				double difference = expectedValue - actualValue;
 
@@ -314,11 +359,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("vary");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.VarY;
 				double difference = expectedValue - actualValue;
 
@@ -331,11 +380,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("EqofTime");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.EquationOfTime;
 				double difference = expectedValue - actualValue;
 
@@ -348,11 +401,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				double expectedValue = item.Field<double>("HaSunrise");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				double actualValue = TestDirector.SolarTimesInstance.HourAngleSunrise;
 				double difference = expectedValue - actualValue;
 
@@ -365,11 +422,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				DateTime expectedValue = item.Field<DateTime>("SolarNoon");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				DateTime actualValue = TestDirector.SolarTimesInstance.SolarNoon;
 				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
 
@@ -385,11 +446,15 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				DateTime expectedValue = item.Field<DateTime>("SunriseTime");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				DateTime actualValue = TestDirector.SolarTimesInstance.Sunrise;
 				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
 
@@ -405,11 +470,17 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
 				DateTime expectedValue = item.Field<DateTime>("SunsetTime");
 
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 				DateTime actualValue = TestDirector.SolarTimesInstance.Sunset;
 				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
 
@@ -425,9 +496,13 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			foreach (var item in TestDirector.SolarTestData)
 			{
+				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
+				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
 				DateTime date = item.Field<DateTime>("Date");
 				DateTime time = item.Field<DateTime>("Time");
-				TestDirector.SolarTimesInstance.ForDate = date.Add(time.TimeOfDay);
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
+				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
+				TestDirector.SolarTimesInstance.ForDate = dto;
 
 				double expectedValue = item.Field<double>("SunlightDuration");
 				double actualValue = TestDirector.SolarTimesInstance.SunlightDuration.TotalMinutes;

@@ -27,7 +27,7 @@ namespace Innovative.SolarCalculator
 		/// </summary>		
 		public static double Pi = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679;
 
-		private DateTime _forDate = DateTime.MinValue;
+		private DateTimeOffset _forDate = DateTimeOffset.MinValue;
 		private double _atmosphericRefraction = .83333;
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Innovative.SolarCalculator
         /// Creates an instance of the SolarTimes object with the specified ForDate.
         /// </summary>
 		/// <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
-        public SolarTimes(DateTime forDate)
+		public SolarTimes(DateTimeOffset forDate)
         {
             this.ForDate = forDate;
         }
@@ -50,7 +50,7 @@ namespace Innovative.SolarCalculator
 		/// <summary>
 		/// Specifies the Date for which the sunrise and sunset will be calculated.
 		/// </summary>
-		public DateTime ForDate
+		public DateTimeOffset ForDate
 		{
 			get
 			{
@@ -92,7 +92,7 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				return TimeZoneInfo.Local.GetUtcOffset(this.ForDate.Date).TotalHours;
+				return this.ForDate.Offset.TotalHours;
 			}
 		}
 

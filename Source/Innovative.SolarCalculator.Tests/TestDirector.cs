@@ -36,7 +36,7 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			get
 			{
-				return 0.000000000000001;
+				return 0.0000000000001;
 			}
 		}
 
@@ -60,7 +60,7 @@ namespace Innovative.SolarCalculator.Tests
         {
             get
             {
-				return 0.09;
+				return 0.009;
             }
         }
 
@@ -86,8 +86,6 @@ namespace Innovative.SolarCalculator.Tests
                 if (_solarTimes == null)
                 {
                     _solarTimes = new SolarTimes();
-                    _solarTimes.Latitude = Properties.Settings.Default.Latitude;
-                    _solarTimes.Longitude = Properties.Settings.Default.Longitude;
                 }
 
                 return _solarTimes;

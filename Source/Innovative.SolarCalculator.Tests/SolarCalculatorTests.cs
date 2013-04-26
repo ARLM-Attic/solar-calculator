@@ -13,550 +13,450 @@
 // *** This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, 
 // *** do not use the software. Full license details can be found at https://solarcalculator.codeplex.com/license.
 // ***
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Data;
-using System.Diagnostics;
-using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Innovative.SolarCalculator.Tests
 {
 	[TestClass]
 	public class SolarCalculatorTests
 	{
+		private TestContext _testContext = null;
+
+		public TestContext TestContext
+		{
+			get
+			{
+				return _testContext;
+			}
+			set
+			{
+				_testContext = value;
+			}
+		}
+
 		#region C#/Excel Comparison Tests
 		[TestMethod]
-		public void CsharpExcelModuloComparisons()
-		{
-			foreach (var item in TestDirector.MathTestData)
-			{
-				double value1 = item.Field<double>("VALUE1");
-				double value2 = item.Field<double>("VALUE2");
-				double expectedValue = item.Field<double>("MOD");
-
-				int actualValue = (int)value1 % (int)value2;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("Modulo calculation in C# does not match Excel. The difference is {0}", difference));
-			}
-		}
-
-		[TestMethod]
+		[TestCategory("C#/Excel Comparison Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelSineComparisons()
 		{
-			foreach (var item in TestDirector.MathTestData)
-			{
-				double value1 = item.Field<double>("VALUE1");
-				double expectedValue = item.Field<double>("SIN");
+			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SIN"]);
 
-				double actualValue = Math.Sin(value1);
-				double difference = expectedValue - actualValue;
+			double actualValue = Math.Sin(value1);
+			double difference = expectedValue - actualValue;
 
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("SIN calculation in C# does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The SIN calculation in C# does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("C#/Excel Comparison Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelASineComparisons()
 		{
-			foreach (var item in TestDirector.MathTestData)
-			{
-				double value1 = item.Field<double>("VALUE1");
-				double sin = item.Field<double>("SIN");
-				double expectedValue = item.Field<double>("ASIN");
+			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
+			double sin = Convert.ToDouble(this.TestContext.DataRow["SIN"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["ASIN"]);
 
-				double actualValue = Math.Asin(sin);
-				double difference = expectedValue - actualValue;
+			double actualValue = Math.Asin(sin);
+			double difference = expectedValue - actualValue;
 
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("ASIN calculation in C# does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The ASIN calculation in C# does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("C#/Excel Comparison Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelCosineComparisons()
 		{
-			foreach (var item in TestDirector.MathTestData)
-			{
-				double value1 = item.Field<double>("VALUE1");
-				double value2 = item.Field<double>("VALUE2");
-				double expectedValue = item.Field<double>("COS");
+			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
+			double value2 = Convert.ToDouble(this.TestContext.DataRow["VALUE2"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["COS"]);
 
-				double actualValue = Math.Cos(value1);
-				double difference = expectedValue - actualValue;
+			double actualValue = Math.Cos(value1);
+			double difference = expectedValue - actualValue;
 
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("COS calculation in C# does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The COS calculation in C# does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("C#/Excel Comparison Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelACosineComparisons()
 		{
-			foreach (var item in TestDirector.MathTestData)
-			{
-				double value1 = item.Field<double>("VALUE1");
-				double value2 = item.Field<double>("VALUE2");
-				double cos = item.Field<double>("COS");
-				double expectedValue = item.Field<double>("ACOS");
+			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
+			double value2 = Convert.ToDouble(this.TestContext.DataRow["VALUE2"]);
+			double cos = Convert.ToDouble(this.TestContext.DataRow["COS"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["ACOS"]);
 
-				double actualValue = Math.Acos(cos);
-				double difference = expectedValue - actualValue;
+			double actualValue = Math.Acos(cos);
+			double difference = expectedValue - actualValue;
 
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("ACOS calculation in C# does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The ACOS calculation in C# does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("C#/Excel Comparison Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelTangentComparisons()
 		{
-			foreach (var item in TestDirector.MathTestData)
-			{
-				double value1 = item.Field<double>("VALUE1");
-				double value2 = item.Field<double>("VALUE2");
-				double expectedValue = item.Field<double>("TAN");
+			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
+			double value2 = Convert.ToDouble(this.TestContext.DataRow["VALUE2"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["TAN"]);
 
-				double actualValue = Math.Tan(value1);
-				double difference = expectedValue - actualValue;
+			double actualValue = Math.Tan(value1);
+			double difference = expectedValue - actualValue;
 
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("TAN calculation in C# does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The TAN calculation in C# does not match Excel. The difference is {0}", difference));
 		}
 		#endregion
 
 		#region Solar Calculation Tests
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void JulianDayComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("JulianDay");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["JulianDay"]);
+			double actualValue = solarTimes.JulianDay;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.JulianDay;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Date (Column F) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Date (Column F) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void JulianCenturyComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("JulianCentury");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["JulianCentury"]);
+			double actualValue = solarTimes.JulianCentury;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.JulianCentury;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The JulianCentury (Column G) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The JulianCentury (Column G) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SunGeometricMeanLongitudeComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);				
-				double expectedValue = item.Field<double>("GeomMeanLongSun");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["GeomMeanLongSun"]);
+			double actualValue = solarTimes.SunGeometricMeanLongitude;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.SunGeometricMeanLongitude;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Century (Column I) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Century (Column I) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SunMeanAnomalyComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("GeomMeanAnomSun");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["GeomMeanAnomSun"]);
+			double actualValue = solarTimes.SunMeanAnomaly;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.SunMeanAnomaly;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Mean Anomaly (Column J) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Mean Anomaly (Column J) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void EccentricityOfEarthOrbitComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("EccentEarthOrbit");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["EccentEarthOrbit"]);
+			double actualValue = solarTimes.EccentricityOfEarthOrbit;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.EccentricityOfEarthOrbit;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Eccentricity Of Earth Orbit (Column K) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Eccentricity Of Earth Orbit (Column K) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SunEquationOfCenterComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("SunEqofCtr");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SunEqofCtr"]);
+			double actualValue = solarTimes.SunEquationOfCenter;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.SunEquationOfCenter;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column L) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column L) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SunTrueLongitudeComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("SunTrueLong");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SunTrueLong"]);
+			double actualValue = solarTimes.SunTrueLongitude;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.SunTrueLongitude;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun True Longitude (Column M) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun True Longitude (Column M) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SunApparentLongitudeComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("SunAppLong");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SunAppLong"]);
+			double actualValue = solarTimes.SunApparentLongitude;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.SunApparentLongitude;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Apparent Longitude (Column P) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Apparent Longitude (Column P) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void MeanEclipticObliquityComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("MeanObliqEcliptic");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["MeanObliqEcliptic"]);
+			double actualValue = solarTimes.MeanEclipticObliquity;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.MeanEclipticObliquity;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Mean Ecliptic Obliquity (Column Q) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Mean Ecliptic Obliquity (Column Q) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void ObliquityCorrectionComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("ObliqCorr");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["ObliqCorr"]);
+			double actualValue = solarTimes.ObliquityCorrection;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.ObliquityCorrection;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Obliquity Correction (Column R) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Obliquity Correction (Column R) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SolarDeclinationComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("SunDeclin");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SunDeclin"]);
+			double actualValue = solarTimes.SolarDeclination;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.SolarDeclination;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Solar Declination (Column T) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Solar Declination (Column T) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void VarYComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("vary");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["vary"]);
+			double actualValue = solarTimes.VarY;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.VarY;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Var Y (Column U) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Var Y (Column U) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void EquationOfTimeComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("EqofTime");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["EqofTime"]);
+			double actualValue = solarTimes.EquationOfTime;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.EquationOfTime;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column V) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column V) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void HourAngleSunriseComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
-			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				double expectedValue = item.Field<double>("HaSunrise");
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["HaSunrise"]);
+			double actualValue = solarTimes.HourAngleSunrise;
+			double difference = expectedValue - actualValue;
 
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				double actualValue = TestDirector.SolarTimesInstance.HourAngleSunrise;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Hour Angle Sunrise (Column W) calculation does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Hour Angle Sunrise (Column W) calculation does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SolarNoonComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			DateTime expectedValue = Convert.ToDateTime(this.TestContext.DataRow["SolarNoon"]);
+			DateTime actualValue = solarTimes.SolarNoon;
+			TimeSpan difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay);
+
+			if (difference > TestDirector.TimeSpanDelta)
 			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				DateTime expectedValue = item.Field<DateTime>("SolarNoon");
-
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				DateTime actualValue = TestDirector.SolarTimesInstance.SolarNoon;
-				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
-
-				if (difference > TestDirector.TimeSpanDoubleDelta)
-				{
-					Assert.Fail(string.Format("The Solar Noon (Column X) calculation does not match Excel. The difference is {0}", difference));
-				}
+				Assert.Fail(string.Format("The Solar Noon (Column X) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SunriseComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			DateTime expectedValue = Convert.ToDateTime(this.TestContext.DataRow["SunriseTime"]);
+			DateTime actualValue = solarTimes.Sunrise;
+			TimeSpan difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay);
+
+			if (difference > TestDirector.TimeSpanDelta)
 			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				DateTime expectedValue = item.Field<DateTime>("SunriseTime");
-
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				DateTime actualValue = TestDirector.SolarTimesInstance.Sunrise;
-				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
-
-				if (difference > TestDirector.TimeSpanDoubleDelta)
-				{
-					Assert.Fail(string.Format("The Sunrise (Column Y) calculation does not match Excel. The difference is {0}", difference));
-				}
+				Assert.Fail(string.Format("The Sunrise (Column Y) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SunsetComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			DateTime expectedValue = Convert.ToDateTime(this.TestContext.DataRow["SunsetTime"]);
+			DateTime actualValue = solarTimes.Sunset;
+			TimeSpan difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay);
+
+			if (difference > TestDirector.TimeSpanDelta)
 			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				DateTime expectedValue = item.Field<DateTime>("SunsetTime");
-
-				TestDirector.SolarTimesInstance.ForDate = dto;
-				DateTime actualValue = TestDirector.SolarTimesInstance.Sunset;
-				double difference = expectedValue.TimeOfDay.Subtract(actualValue.TimeOfDay).TotalSeconds;
-
-				if (difference > TestDirector.TimeSpanDoubleDelta)
-				{
-					Assert.Fail(string.Format("The Sunset (Column Z) calculation does not match Excel. The difference is {0}", difference));
-				}
+				Assert.Fail(string.Format("The Sunset (Column Z) calculation does not match Excel. The difference is {0}", difference));
 			}
 		}
 
 		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
 		public void SunlightDurationComparisonTest()
 		{
-			foreach (var item in TestDirector.SolarTestData)
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			TimeSpan expectedValue = TimeSpan.FromMinutes(Convert.ToDouble(this.TestContext.DataRow["SunlightDuration"]));
+			TimeSpan actualValue = solarTimes.SunlightDuration;
+			TimeSpan difference = expectedValue - actualValue;
+
+			if (difference > TestDirector.TimeSpanDelta)
 			{
-				TestDirector.SolarTimesInstance.Latitude = item.Field<double>("Latitude");
-				TestDirector.SolarTimesInstance.Longitude = item.Field<double>("Longitude");
-				DateTime date = item.Field<DateTime>("Date");
-				DateTime time = item.Field<DateTime>("Time");
-				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(item.Field<double>("TimeZoneOffset")));
-				DateTimeOffset dto = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset);
-				TestDirector.SolarTimesInstance.ForDate = dto;
-
-				double expectedValue = item.Field<double>("SunlightDuration");
-				double actualValue = TestDirector.SolarTimesInstance.SunlightDuration.TotalMinutes;
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sunlight Duration (Column AA) calculation does not match Excel. The difference is {0}", difference));
+				Assert.Fail(string.Format("The Sunlight Duration (Column AA) calculation does not match Excel. The difference is {0}", difference));
 			}
+		}
+
+		[TestMethod]
+		[TestCategory("Solar Calculation Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "Calculations$", DataAccessMethod.Sequential)]
+		public void TrueSolarTimeComparisonTest()
+		{
+			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["TrueSolarTime"]);
+			double actualValue = solarTimes.TrueSolarTime;
+			double difference = expectedValue - actualValue;
+
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The True Solar Time (Column AB) calculation does not match Excel. The difference is {0}", difference));
 		}
 		#endregion
 
 		#region Custom Math Method Tests
 		[TestMethod]
-		public void ExcelDateValueTest()
-		{
-			foreach (var item in TestDirector.DateValueTestData)
-			{
-				DateTime value1 = item.Field<DateTime>("DATE");
-				double expectedValue = item.Field<double>("DATEVALUE");
-
-				double actualValue = value1.ToExcelDateValue();
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToRadians() does not match Excel. The difference is {0}", difference));
-			}
-		}
-
-		[TestMethod]
+		[TestCategory("Custom Math Method Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void ToRadiansTest()
 		{
-			foreach (var item in TestDirector.MathTestData)
-			{
-				double value1 = item.Field<double>("VALUE1");
-				double expectedValue = item.Field<double>("RADIANS");
+			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["RADIANS"]);
+			double actualValue = Angle.ToRadians(value1);
+			double difference = expectedValue - actualValue;
 
-				double actualValue = TestDirector.SolarTimesInstance.ToRadians(value1);
-				double difference = expectedValue - actualValue;
-
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToRadians() does not match Excel. The difference is {0}", difference));
-			}
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToRadians() does not match Excel. The difference is {0}", difference));
 		}
 
 		[TestMethod]
+		[TestCategory("Custom Math Method Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void ToDegreesTest()
 		{
-			foreach (var item in TestDirector.MathTestData)
-			{
-				double radians = item.Field<double>("VALUE3");
-				double expectedValue = item.Field<double>("DEGREES");
+			double radians = Convert.ToDouble(this.TestContext.DataRow["VALUE3"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["DEGREES"]);
+			double actualValue = Angle.ToDegrees(radians);
+			double difference = expectedValue - actualValue;
 
-				double actualValue = TestDirector.SolarTimesInstance.ToDegrees(radians);
-				double difference = expectedValue - actualValue;
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToDegrees() does not match Excel. The difference is {0}", difference));
+		}
+		#endregion
 
-				Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToDegrees() does not match Excel. The difference is {0}", difference));
-			}
+		#region Excel Formulae Tests
+		[TestMethod]
+		[TestCategory("Excel Formulae Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
+		public void ExcelModuloComparisons()
+		{
+			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
+			double value2 = Convert.ToDouble(this.TestContext.DataRow["VALUE2"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["MOD"]);
+
+			double actualValue = ExcelFormulae.Mod(value1, value2);
+			double difference = expectedValue - actualValue;
+
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("The Modulo (% operator) calculation in C# does not match Excel. The difference is {0}", difference));
+		}
+
+		[TestMethod]
+		[TestCategory("Excel Formulae Tests")]
+		[DeploymentItem("NOAA Solar Calculations Test Data.xlsx")]
+		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "DateValue$", DataAccessMethod.Sequential)]
+		public void ExcelDateValueTest()
+		{
+			DateTime value1 = Convert.ToDateTime(this.TestContext.DataRow["DATE"]);
+			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["DATEVALUE"]);
+
+			double actualValue = ExcelFormulae.ToExcelDateValue(value1);
+			double difference = expectedValue - actualValue;
+
+			Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToRadians() does not match Excel. The difference is {0}", difference));
 		}
 		#endregion
 	}

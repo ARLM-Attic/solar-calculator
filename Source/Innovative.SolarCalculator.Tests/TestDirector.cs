@@ -14,28 +14,21 @@
 // *** do not use the software. Full license details can be found at https://solarcalculator.codeplex.com/license.
 // ***
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Xml;
 
 namespace Innovative.SolarCalculator.Tests
 {
     public class TestDirector
     {
-		private static IEnumerable<DataRow> _mathTestData = null;
-		private static IEnumerable<DataRow> _solarTestData = null;
-		private static IEnumerable<DataRow> _oleAutomationTestData = null;
-        private static SolarTimes _solarTimes = null;
-
         /// <summary>
         /// Specifies the precision when comparing data values of type double
         /// for math comparison tests.
-        /// </summary>
+        /// </summary>		
 		public static double MathDoubleDelta
 		{
 			get
 			{
+				// ***   1234567890123 
 				return 0.0000000000001;
 			}
 		}
@@ -48,7 +41,8 @@ namespace Innovative.SolarCalculator.Tests
         {
             get
             {
-				return 0.000000000000001;
+				// ***   12345678901234
+				return 0.00000000000001;
             }
         }
 
@@ -60,7 +54,9 @@ namespace Innovative.SolarCalculator.Tests
         {
             get
             {
-				return 0.009;
+				//return 0.0000000000004;
+				// ***   1234567890123
+				return 0.000009;
             }
         }
 
@@ -68,85 +64,47 @@ namespace Innovative.SolarCalculator.Tests
 		/// Specifies the number of seconds allowed for variation in a
 		/// TimeSpan comparison test.
 		/// </summary>
-		public static double TimeSpanDoubleDelta
+		public static TimeSpan TimeSpanDelta
 		{
 			get
 			{
-				return 1.0;
+				// ***
+				// *** The maximum difference allowed is 500 milliseconds
+				// ***
+				return TimeSpan.FromMilliseconds(500);
 			}
 		}
 
-        /// <summary>
-        /// Creates a SolarTimes instance for use in test cases.
-        /// </summary>
-        public static SolarTimes SolarTimesInstance
+		/// <summary>
+		/// Creates a SolarTimes instance for use in tests.
+		/// </summary>
+		public static SolarTimes SolarTimesInstance(DataRow dataRow)
         {
-            get
-            {
-                if (_solarTimes == null)
-                {
-                    _solarTimes = new SolarTimes();
-                }
+			SolarTimes returnValue = null;
 
-                return _solarTimes;
-            }
-        }
-
-        /// <summary>
-        /// Gets the test data required for the mathematical tests.
-        /// </summary>
-		public static IEnumerable<DataRow> MathTestData
-		{
-			get
+			if (dataRow.Table.Columns.Contains("Date") &&
+				dataRow.Table.Columns.Contains("Time") &&
+				dataRow.Table.Columns.Contains("TimeZoneOffset") &&
+				dataRow.Table.Columns.Contains("Latitude") &&
+				dataRow.Table.Columns.Contains("Longitude"))
 			{
-				if (_mathTestData == null)
+				DateTime date = Convert.ToDateTime(dataRow["Date"]);
+				DateTime time = Convert.ToDateTime(dataRow["Time"]);
+				TimeSpan tzOffset = TimeSpan.FromHours(Convert.ToInt32(dataRow["TimeZoneOffset"]));
+
+				returnValue = new SolarTimes()
 				{
-					ExcelQuery excel = new ExcelQuery("NOAA Solar Calculations Test Data.xlsx");
-					string sql = "SELECT * FROM [ExcelFormulas$]";
-					DataSet data = excel.ExecuteDataSet(sql, "ExcelFormulas");
-					_mathTestData = data.Tables["ExcelFormulas"].AsEnumerable();
-				}
-
-				return _mathTestData;
+					Latitude = Convert.ToDouble(dataRow["Latitude"]),
+					Longitude = Convert.ToDouble(dataRow["Longitude"]),
+					ForDate = new DateTimeOffset(date.Add(time.TimeOfDay), tzOffset)
+				};
 			}
-		}
-
-        /// <summary>
-        /// Gets the test data required for the solar tests.
-        /// </summary>
-		public static IEnumerable<DataRow> SolarTestData
-		{
-			get
+			else
 			{
-				if (_solarTestData == null)
-				{
-					ExcelQuery excel = new ExcelQuery("NOAA Solar Calculations Test Data.xlsx");
-					string sql = "SELECT * FROM [Calculations$]";
-                    DataSet data = excel.ExecuteDataSet(sql, "ExcelFormulas");
-                    _solarTestData = data.Tables["ExcelFormulas"].AsEnumerable();
-				}
-
-				return _solarTestData;
+				throw new Exception("The DatRow used to create the SolarTImes instance does not contain the necessary columns.");
 			}
-		}
 
-        /// <summary>
-        /// Gets the test data required for the DateTime extension tests.
-        /// </summary>
-		public static IEnumerable<DataRow> DateValueTestData
-		{
-			get
-			{
-				if (_oleAutomationTestData == null)
-				{
-					ExcelQuery excel = new ExcelQuery("NOAA Solar Calculations Test Data.xlsx");
-					string sql = "SELECT * FROM [DateValue$]";
-                    DataSet data = excel.ExecuteDataSet(sql, "ExcelFormulas");
-                    _oleAutomationTestData = data.Tables["ExcelFormulas"].AsEnumerable();
-				}
-
-				return _oleAutomationTestData;
-			}
+			return returnValue;
 		}
     }
 }

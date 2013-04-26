@@ -42,7 +42,9 @@
     <None Include="SolarCalculator.1.0.4.nupkg" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Angle.cs" />
     <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="ExcelFormulae.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolarTimes.cs" />
   </ItemGroup>

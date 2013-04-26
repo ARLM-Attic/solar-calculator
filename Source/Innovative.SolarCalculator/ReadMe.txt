@@ -26,3 +26,9 @@ http://www.nefsc.noaa.gov/AstroCalc4R/
 The calculations are based on the book
 "Astronomical Algorithms"
 Jean Meeus (Author) 
+
+// ***
+// *** Mod
+// ***
+See note about the differences between the Excel Mod function and the Mod operator
+http://support.microsoft.com/kb/141178?wa=wsignin1.0

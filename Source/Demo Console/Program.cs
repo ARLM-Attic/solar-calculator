@@ -14,9 +14,6 @@
 // *** do not use the software. Full license details can be found at https://solarcalculator.codeplex.com/license.
 // ***
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Innovative.SolarCalculator;
 
 namespace Demo_Console
@@ -25,7 +22,7 @@ namespace Demo_Console
 	{
 		static void Main(string[] args)
 		{
-			SolarTimes solarTimes = new SolarTimes(DateTime.Now);			
+			SolarTimes solarTimes = new SolarTimes(DateTime.Now);
 
 			// ***
 			// *** Geo coordinates

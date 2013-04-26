@@ -17,35 +17,32 @@ using System;
 
 namespace Innovative.SolarCalculator
 {
-    /// <summary>
-    /// Provides mathematical operations to calculate the sunrise and sunset for a given date.
-    /// </summary>
+	/// <summary>
+	/// Provides mathematical operations to calculate the sunrise and sunset for a given date.
+	/// </summary>
 	public class SolarTimes
 	{
-		/// <summary>
-		/// Math.PI is carried to five decimal places. We are using fifteen paces (the rest here is just for fun).
-		/// </summary>		
-		public static double Pi = 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679;
-
 		private DateTimeOffset _forDate = DateTimeOffset.MinValue;
-		private double _atmosphericRefraction = .83333;
+		private double _atmosphericRefraction = 0.833;
+		private double _longitude = 0;
+		private double _latitude = 0;
 
-        /// <summary>
-        /// Creates a default instance of the SolarTimes object.
-        /// </summary>
-        public SolarTimes()
-        {
+		/// <summary>
+		/// Creates a default instance of the SolarTimes object.
+		/// </summary>
+		public SolarTimes()
+		{
 			this.ForDate = DateTime.Now;
-        }
+		}
 
-        /// <summary>
-        /// Creates an instance of the SolarTimes object with the specified ForDate.
-        /// </summary>
+		/// <summary>
+		/// Creates an instance of the SolarTimes object with the specified ForDate.
+		/// </summary>
 		/// <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
 		public SolarTimes(DateTimeOffset forDate)
-        {
-            this.ForDate = forDate;
-        }
+		{
+			this.ForDate = forDate;
+		}
 
 		/// <summary>
 		/// Specifies the Date for which the sunrise and sunset will be calculated.
@@ -66,20 +63,54 @@ namespace Innovative.SolarCalculator
 		/// Angular measurement of east-west location on Earth's surface. Longitude is defined from the 
 		/// prime meridian, which passes through Greenwich, England. The international date line is defined 
 		/// around +/- 180° longitude. (180° east longitude is the same as 180° west longitude, because 
-		/// there are 360° in a circle.) Many astronomers define east longitude as positive. For our new 
-		/// solar calculator, we conform to the international standard, with east longitude positive.
+		/// there are 360° in a circle.) Many astronomers define east longitude as positive. This 
+		/// solar calculator conforms to the international standard, with east longitude positive.
 		/// (Spreadsheet Column B, Row 4)
 		/// </summary>
-		public double Longitude { get; set; }
+		public double Longitude
+		{
+			get
+			{
+				return _longitude;
+			}
+			set
+			{
+				if (value >= -180 && value <= 180)
+				{
+					_longitude = value;
+				}
+				else
+				{
+					throw new ArgumentOutOfRangeException("The value for Longitude must be between -180° and 180°.");
+				}
+			}
+		}
 
 		/// <summary>
 		/// Angular measurement of north-south location on Earth's surface. Latitude ranges from 90° 
-		/// south (at the south pole), through 0° (all along the equator), to 90° north (at the north pole). 
-		/// Latitude is usually defined as a positive value in the northern hemisphere and a negative value 
-		/// in the southern hemisphere.
+		/// south (at the south pole; specified by a negative angle), through 0° (all along the equator), 
+		/// to 90° north (at the north pole). Latitude is usually defined as a positive value in the 
+		/// northern hemisphere and a negative value in the southern hemisphere.
 		/// (Spreadsheet Column B, Row 3)
 		/// </summary>
-		public double Latitude { get; set; }
+		public double Latitude
+		{
+			get
+			{
+				return _latitude;
+			}
+			set
+			{
+				if (value >= -90 && value <= 90)
+				{
+					_latitude = value;
+				}
+				else
+				{
+					throw new ArgumentOutOfRangeException("The value for Latitude must be between -90° and 90°.");
+				}
+			}
+		}
 
 		/// <summary>
 		/// Gets the time zone offset for the specified date.
@@ -106,7 +137,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4.0 / 1440.0;
+				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4 / 1440;
 				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -123,67 +154,32 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4.0 / 1440.0;
+				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4 / 1440;
 				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
 			}
 		}
 
+		#region Computational Members
 		/// <summary>
-		/// Converts a radian angle to degrees
-		/// </summary>
-		/// <param name="radians">The angle in radian units</param>
-		/// <returns>The angle in degree units</returns>
-		public double ToDegrees(double radians)
+		/// Time past local midnight.
+		/// (Spreadsheet Column E)
+		/// </summary>	
+		public double TimePastLocalMidnight
 		{
-			double returnValue = 0.0;
+			get
+			{
+				double returnValue = 0.0;
 
-			// ***
-			// *** Factor = 180 / pi 
-			// ***
-			returnValue = radians * (180.0 / SolarTimes.Pi);
+				// ***
+				// *** .1 / 24
+				// ***
+				returnValue = DateTime.Parse("12/30/1899  12:00:00 AM").Add(this.ForDate.TimeOfDay).ToOleAutomationDate();
 
-			return returnValue;
+				return returnValue;
+			}
 		}
-
-		/// <summary>
-		/// A radian is the measure of a central angle subtending an arc equal in length to the radius. This method 
-		/// converts an angle measured in degrees to radian units.
-		/// </summary>
-        /// <param name="degrees">The angle in degree units</param>
-		/// <returns>The angle in radian units</returns>
-		public double ToRadians(double degrees)
-		{
-			double returnValue = 0.0;
-
-			// ***
-			// *** Factor = pi / 180 
-			// ***
-			returnValue = (degrees * SolarTimes.Pi) / 180.0;
-
-			return returnValue;
-		}
-
-		///// <summary>
-		///// Time past local midnight.
-		///// (Spreadsheet Column E)
-		///// </summary>	
-		//public double TimePastLocalMidnight
-		//{
-		//	get
-		//	{
-		//		double returnValue = 0.0;
-
-		//		// ***
-		//		// *** The .1/24 formula was removed and this was replaced using the time from
-		//		// *** the date supplied.
-		//		// ***
-		//		returnValue = DateTime.Parse("12/30/1899  12:00:00 AM").Add(this.ForDate.TimeOfDay).ToOleAutomationDate();
-
-		//		return returnValue;
-		//	}
-		//}
 
 		/// <summary>
 		/// Julian Day: a time period used in astronomical circles, defined as the number of days 
@@ -201,7 +197,7 @@ namespace Innovative.SolarCalculator
 				// ***
 				// *** this.TimePastLocalMidnight was removed since the time is in ForDate
 				// ***
-				returnValue = this.ForDate.Date.ToExcelDateValue() + 2415018.5 - (this.TimeZoneOffset / 24.0);
+				returnValue = ExcelFormulae.ToExcelDateValue(this.ForDate.Date) + 2415018.5 - (this.TimeZoneOffset / 24);
 
 				return returnValue;
 			}
@@ -221,7 +217,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = (this.JulianDay - 2451545.0) / 36525.0;
+				returnValue = (this.JulianDay - 2451545) / 36525;
 
 				return returnValue;
 			}
@@ -237,7 +233,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = 280.46646 + this.JulianCentury * (36000.76983 + this.JulianCentury * 0.0003032) % 360.0;
+				returnValue = ExcelFormulae.Mod(280.46646 + this.JulianCentury * (36000.76983 + this.JulianCentury * 0.0003032), 360);
 
 				return returnValue;
 			}
@@ -287,7 +283,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = Math.Sin(this.ToRadians(SunMeanAnomaly)) * (1.914602 - this.JulianCentury * (0.004817 + 0.000014 * this.JulianCentury)) + Math.Sin(this.ToRadians(2.0 * SunMeanAnomaly)) * (0.019993 - 0.000101 * JulianCentury) + Math.Sin(this.ToRadians(3.0 * this.SunMeanAnomaly)) * 0.000289;
+				returnValue = Math.Sin(Angle.ToRadians(SunMeanAnomaly)) * (1.914602 - this.JulianCentury * (0.004817 + 0.000014 * this.JulianCentury)) + Math.Sin(Angle.ToRadians(2.0 * SunMeanAnomaly)) * (0.019993 - 0.000101 * JulianCentury) + Math.Sin(Angle.ToRadians(3.0 * this.SunMeanAnomaly)) * 0.000289;
 
 				return returnValue;
 			}
@@ -319,7 +315,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = this.SunTrueLongitude - 0.00569 - 0.00478 * Math.Sin(this.ToRadians(125.04 - 1934.136 * this.JulianCentury));
+				returnValue = this.SunTrueLongitude - 0.00569 - 0.00478 * Math.Sin(Angle.ToRadians(125.04 - 1934.136 * this.JulianCentury));
 
 				return returnValue;
 			}
@@ -335,23 +331,23 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = 23.0 + (26.0 + ((21.448 - this.JulianCentury * (46.815 + this.JulianCentury * (0.00059 - this.JulianCentury * 0.001813)))) / 60.0) / 60.0;
+				returnValue = 23 + (26 + ((21.448 - this.JulianCentury * (46.815 + this.JulianCentury * (0.00059 - this.JulianCentury * 0.001813)))) / 60) / 60;
 
 				return returnValue;
 			}
 		}
 
-        /// <summary>
+		/// <summary>
 		/// Obliquity Correction (degrees)
-        /// (Spreadsheet Column R)
-        /// </summary>
+		/// (Spreadsheet Column R)
+		/// </summary>
 		public double ObliquityCorrection
 		{
 			get
 			{
 				double returnValue = 0.0;
 
-				returnValue = this.MeanEclipticObliquity + 0.00256 * Math.Cos(this.ToRadians(125.04 - 1934.136 * this.JulianCentury));
+				returnValue = this.MeanEclipticObliquity + 0.00256 * Math.Cos(Angle.ToRadians(125.04 - 1934.136 * this.JulianCentury));
 
 				return returnValue;
 			}
@@ -369,7 +365,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = this.ToDegrees(Math.Asin(Math.Sin(this.ToRadians(this.ObliquityCorrection)) * Math.Sin(this.ToRadians(this.SunApparentLongitude))));
+				returnValue = Angle.ToDegrees(Math.Asin(Math.Sin(Angle.ToRadians(this.ObliquityCorrection)) * Math.Sin(Angle.ToRadians(this.SunApparentLongitude))));
 
 				return returnValue;
 			}
@@ -385,7 +381,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = Math.Tan(this.ToRadians(this.ObliquityCorrection / 2.0)) * Math.Tan(this.ToRadians(this.ObliquityCorrection / 2.0));
+				returnValue = Math.Tan(Angle.ToRadians(this.ObliquityCorrection / 2.0)) * Math.Tan(Angle.ToRadians(this.ObliquityCorrection / 2.0));
 
 				return returnValue;
 			}
@@ -403,7 +399,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = 4.0 * this.ToDegrees(this.VarY * Math.Sin(2.0 * this.ToRadians(this.SunGeometricMeanLongitude)) - 2.0 * this.EccentricityOfEarthOrbit * Math.Sin(this.ToRadians(this.SunMeanAnomaly)) + 4 * this.EccentricityOfEarthOrbit * this.VarY * Math.Sin(this.ToRadians(this.SunMeanAnomaly)) * Math.Cos(2.0 * this.ToRadians(this.SunGeometricMeanLongitude)) - 0.5 * this.VarY * this.VarY * Math.Sin(4.0 * this.ToRadians(this.SunGeometricMeanLongitude)) - 1.25 * this.EccentricityOfEarthOrbit * this.EccentricityOfEarthOrbit * Math.Sin(2.0 * this.ToRadians(this.SunMeanAnomaly)));
+				returnValue = 4 * Angle.ToDegrees(this.VarY * Math.Sin(2 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 2 * this.EccentricityOfEarthOrbit * Math.Sin(Angle.ToRadians(this.SunMeanAnomaly)) + 4 * this.EccentricityOfEarthOrbit * this.VarY * Math.Sin(Angle.ToRadians(this.SunMeanAnomaly)) * Math.Cos(2 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 0.5 * this.VarY * this.VarY * Math.Sin(4 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 1.25 * this.EccentricityOfEarthOrbit * this.EccentricityOfEarthOrbit * Math.Sin(2 * Angle.ToRadians(this.SunMeanAnomaly)));
 
 				return returnValue;
 			}
@@ -419,7 +415,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = this.ToDegrees(Math.Acos(Math.Cos(this.ToRadians((90.0 + this.AtmosphericRefraction))) / (Math.Cos(this.ToRadians(this.Latitude)) * Math.Cos(this.ToRadians(this.SolarDeclination))) - Math.Tan(this.ToRadians(this.Latitude)) * Math.Tan(this.ToRadians(this.SolarDeclination))));
+				returnValue = Angle.ToDegrees(Math.Acos(Math.Cos(Angle.ToRadians((90 + this.AtmosphericRefraction))) / (Math.Cos(Angle.ToRadians(this.Latitude)) * Math.Cos(Angle.ToRadians(this.SolarDeclination))) - Math.Tan(Angle.ToRadians(this.Latitude)) * Math.Tan(Angle.ToRadians(this.SolarDeclination))));
 
 				return returnValue;
 			}
@@ -438,7 +434,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.Now.Date;
 
-				double dayFraction = (720.0 - (4.0 * this.Longitude) - this.EquationOfTime + (this.TimeZoneOffset * 60.0)) / 1440.0;
+				double dayFraction = (720 - (4 * this.Longitude) - this.EquationOfTime + (this.TimeZoneOffset * 60)) / 1440;
 				returnValue = DateTime.Now.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -455,7 +451,7 @@ namespace Innovative.SolarCalculator
 			{
 				TimeSpan returnValue = TimeSpan.Zero;
 
-				returnValue = TimeSpan.FromMinutes(8.0 * this.HourAngleSunrise);
+				returnValue = TimeSpan.FromMinutes(8 * this.HourAngleSunrise);
 
 				return returnValue;
 			}
@@ -466,7 +462,7 @@ namespace Innovative.SolarCalculator
 		/// path of the light is bent due to refraction. This causes stars and planets near the horizon to appear higher in 
 		/// the sky than they actually are, and explains how the sun can still be visible after it has physically passed 
 		/// beyond the horizon at sunset. See also apparent sunrise. Click here for a graph of atmospheric refraction vs. 
-		/// elevation. 
+		/// elevation.
 		/// </summary>
 		public double AtmosphericRefraction
 		{
@@ -479,5 +475,40 @@ namespace Innovative.SolarCalculator
 				_atmosphericRefraction = value;
 			}
 		}
+		#endregion
+
+		#region Obsolete Members
+		[Obsolete("Use Angle.ToRadians() instead.", false)]
+		public double ToRadians(double degrees)
+		{
+			return Angle.ToRadians(degrees);
+		}
+
+		[Obsolete("Use Angle.ToDegrees() instead.", false)]
+		public double ToDegrees(double radians)
+		{
+			return Angle.ToDegrees(radians);
+		}
+		#endregion
+
+		#region Additional Members
+		/// <summary>
+		/// Gets the True Solar Time in minutes. The Solar Time is defined as the time elapsed since the most recent 
+		/// meridian passage of the sun. This system is based on the rotation of the Earth with respect to the sun. 
+		/// A mean solar day is defined as the time between one solar noon and the next, averaged over the year.
+		/// (Spreadsheet Column AB)
+		/// </summary>
+		public double TrueSolarTime
+		{
+			get
+			{
+				double returnValue = 0.0;
+
+				returnValue = ExcelFormulae.Mod(this.TimePastLocalMidnight * 1440 + this.EquationOfTime + 4 * this.Longitude - 60 * this.TimeZoneOffset, 1440);
+
+				return returnValue;
+			}
+		}
+		#endregion
 	}
 }

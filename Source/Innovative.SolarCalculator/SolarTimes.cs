@@ -36,12 +36,39 @@ namespace Innovative.SolarCalculator
 		}
 
 		/// <summary>
-		/// Creates an instance of the SolarTimes object with the specified ForDate.
+		/// Creates an instance of the SolarTimes object with the specified For Date.
 		/// </summary>
 		/// <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
 		public SolarTimes(DateTimeOffset forDate)
 		{
 			this.ForDate = forDate;
+		}
+
+		/// <summary>
+		/// Creates an instance of the SolarTimes object with the specified For Date, Latitude and Longitude.
+		/// </summary>
+		/// <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
+		/// <param name="latitude">Specifies the angular measurement of north-south location on Earth's surface.</param>
+		/// <param name="longitude">Specifies the angular measurement of east-west location on Earth's surface.</param>
+		public SolarTimes(DateTimeOffset forDate, double latitude, double longitude)
+		{
+			this.ForDate = forDate;
+			this.Latitude = latitude;
+			this.Longitude = longitude;
+		}
+
+		/// <summary>
+		/// Creates an instance of the SolarTimes object with the specified For Date, Latitude Longitude and Time Zone Offset
+		/// </summary>
+		/// <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
+		/// <param name="timeZoneOffset">Specifies the time zone offset for the specified date in hours.</param>
+		/// <param name="latitude">Specifies the angular measurement of north-south location on Earth's surface.</param>
+		/// <param name="longitude">Specifies the angular measurement of east-west location on Earth's surface.</param>
+		public SolarTimes(DateTime forDate, int timeZoneOffset, double latitude, double longitude)
+		{
+			this.ForDate = new DateTimeOffset(forDate, TimeSpan.FromHours(timeZoneOffset));
+			this.Latitude = latitude;
+			this.Longitude = longitude;
 		}
 
 		/// <summary>
@@ -75,7 +102,7 @@ namespace Innovative.SolarCalculator
 			}
 			set
 			{
-				if (value >= -180 && value <= 180)
+				if (value >= -180.0 && value <= 180.0)
 				{
 					_longitude = value;
 				}
@@ -101,7 +128,7 @@ namespace Innovative.SolarCalculator
 			}
 			set
 			{
-				if (value >= -90 && value <= 90)
+				if (value >= -90.0 && value <= 90.0)
 				{
 					_latitude = value;
 				}
@@ -137,7 +164,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4 / 1440;
+				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4.0 / 1440.0;
 				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -154,7 +181,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4 / 1440;
+				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4.0 / 1440.0;
 				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -197,7 +224,7 @@ namespace Innovative.SolarCalculator
 				// ***
 				// *** this.TimePastLocalMidnight was removed since the time is in ForDate
 				// ***
-				returnValue = ExcelFormulae.ToExcelDateValue(this.ForDate.Date) + 2415018.5 - (this.TimeZoneOffset / 24);
+				returnValue = ExcelFormulae.ToExcelDateValue(this.ForDate.Date) + 2415018.5 - (this.TimeZoneOffset / 24.0);
 
 				return returnValue;
 			}
@@ -217,7 +244,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = (this.JulianDay - 2451545) / 36525;
+				returnValue = (this.JulianDay - 2451545.0) / 36525.0;
 
 				return returnValue;
 			}
@@ -233,7 +260,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = ExcelFormulae.Mod(280.46646 + this.JulianCentury * (36000.76983 + this.JulianCentury * 0.0003032), 360);
+				returnValue = ExcelFormulae.Mod(280.46646 + this.JulianCentury * (36000.76983 + this.JulianCentury * 0.0003032), 360.0);
 
 				return returnValue;
 			}
@@ -331,7 +358,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = 23 + (26 + ((21.448 - this.JulianCentury * (46.815 + this.JulianCentury * (0.00059 - this.JulianCentury * 0.001813)))) / 60) / 60;
+				returnValue = 23.0 + (26.0 + ((21.448 - this.JulianCentury * (46.815 + this.JulianCentury * (0.00059 - this.JulianCentury * 0.001813)))) / 60.0) / 60.0;
 
 				return returnValue;
 			}
@@ -399,7 +426,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = 4 * Angle.ToDegrees(this.VarY * Math.Sin(2 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 2 * this.EccentricityOfEarthOrbit * Math.Sin(Angle.ToRadians(this.SunMeanAnomaly)) + 4 * this.EccentricityOfEarthOrbit * this.VarY * Math.Sin(Angle.ToRadians(this.SunMeanAnomaly)) * Math.Cos(2 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 0.5 * this.VarY * this.VarY * Math.Sin(4 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 1.25 * this.EccentricityOfEarthOrbit * this.EccentricityOfEarthOrbit * Math.Sin(2 * Angle.ToRadians(this.SunMeanAnomaly)));
+				returnValue = 4.0 * Angle.ToDegrees(this.VarY * Math.Sin(2.0 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 2.0 * this.EccentricityOfEarthOrbit * Math.Sin(Angle.ToRadians(this.SunMeanAnomaly)) + 4.0 * this.EccentricityOfEarthOrbit * this.VarY * Math.Sin(Angle.ToRadians(this.SunMeanAnomaly)) * Math.Cos(2.0 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 0.5 * this.VarY * this.VarY * Math.Sin(4.0 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 1.25 * this.EccentricityOfEarthOrbit * this.EccentricityOfEarthOrbit * Math.Sin(2.0 * Angle.ToRadians(this.SunMeanAnomaly)));
 
 				return returnValue;
 			}
@@ -415,7 +442,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = Angle.ToDegrees(Math.Acos(Math.Cos(Angle.ToRadians((90 + this.AtmosphericRefraction))) / (Math.Cos(Angle.ToRadians(this.Latitude)) * Math.Cos(Angle.ToRadians(this.SolarDeclination))) - Math.Tan(Angle.ToRadians(this.Latitude)) * Math.Tan(Angle.ToRadians(this.SolarDeclination))));
+				returnValue = Angle.ToDegrees(Math.Acos(Math.Cos(Angle.ToRadians((90.0 + this.AtmosphericRefraction))) / (Math.Cos(Angle.ToRadians(this.Latitude)) * Math.Cos(Angle.ToRadians(this.SolarDeclination))) - Math.Tan(Angle.ToRadians(this.Latitude)) * Math.Tan(Angle.ToRadians(this.SolarDeclination))));
 
 				return returnValue;
 			}
@@ -434,7 +461,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.Now.Date;
 
-				double dayFraction = (720 - (4 * this.Longitude) - this.EquationOfTime + (this.TimeZoneOffset * 60)) / 1440;
+				double dayFraction = (720.0 - (4.0 * this.Longitude) - this.EquationOfTime + (this.TimeZoneOffset * 60.0)) / 1440.0;
 				returnValue = DateTime.Now.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -451,7 +478,7 @@ namespace Innovative.SolarCalculator
 			{
 				TimeSpan returnValue = TimeSpan.Zero;
 
-				returnValue = TimeSpan.FromMinutes(8 * this.HourAngleSunrise);
+				returnValue = TimeSpan.FromMinutes(8.0 * this.HourAngleSunrise);
 
 				return returnValue;
 			}
@@ -478,12 +505,22 @@ namespace Innovative.SolarCalculator
 		#endregion
 
 		#region Obsolete Members
+		/// <summary>
+		/// This method is obsolete. Use Angle.ToRadians() instead.
+		/// </summary>
+		/// <param name="degrees">N/A</param>
+		/// <returns>N/A</returns>
 		[Obsolete("Use Angle.ToRadians() instead.", false)]
 		public double ToRadians(double degrees)
 		{
 			return Angle.ToRadians(degrees);
 		}
 
+		/// <summary>
+		/// This method is obsolete. Use Angle.ToDegrees() instead.
+		/// </summary>
+		/// <param name="radians">N/A</param>
+		/// <returns>N/A</returns>
 		[Obsolete("Use Angle.ToDegrees() instead.", false)]
 		public double ToDegrees(double radians)
 		{
@@ -504,7 +541,7 @@ namespace Innovative.SolarCalculator
 			{
 				double returnValue = 0.0;
 
-				returnValue = ExcelFormulae.Mod(this.TimePastLocalMidnight * 1440 + this.EquationOfTime + 4 * this.Longitude - 60 * this.TimeZoneOffset, 1440);
+				returnValue = ExcelFormulae.Mod(this.TimePastLocalMidnight * 1440.0 + this.EquationOfTime + 4.0 * this.Longitude - 60.0 * this.TimeZoneOffset, 1440.0);
 
 				return returnValue;
 			}

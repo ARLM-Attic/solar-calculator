@@ -28,7 +28,7 @@ namespace Innovative.SolarCalculator.Tests
 		{
 			get
 			{
-				// ***   1234567890123 
+				// ***   1234567890123
 				return 0.0000000000001;
 			}
 		}

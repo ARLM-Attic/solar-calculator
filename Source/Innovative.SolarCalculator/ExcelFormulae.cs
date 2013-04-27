@@ -52,7 +52,7 @@ namespace Innovative.SolarCalculator
 		{
 			double returnValue = 0.0;
 
-			if (divisor != 0)
+			if (divisor != 0.0)
 			{
 				returnValue = number - divisor * Math.Floor(number / divisor);
 			}

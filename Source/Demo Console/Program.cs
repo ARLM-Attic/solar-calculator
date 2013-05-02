@@ -16,7 +16,7 @@
 using System;
 using Innovative.SolarCalculator;
 
-namespace Demo_Console
+namespace Innovative.SolarCalculator.Demo
 {
 	class Program
 	{

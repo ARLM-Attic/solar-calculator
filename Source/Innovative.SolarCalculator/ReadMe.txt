@@ -27,6 +27,8 @@ The calculations are based on the book
 "Astronomical Algorithms"
 Jean Meeus (Author) 
 
+To get test data other than the spreadsheet from NOAA see http://aa.usno.navy.mil/data/docs/RS_OneYear.php.
+
 // ***
 // *** Mod
 // ***

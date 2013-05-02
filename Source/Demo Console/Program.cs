@@ -22,16 +22,7 @@ namespace Demo_Console
 	{
 		static void Main(string[] args)
 		{
-			AngleDemo();
-		}
-
-		static void AngleDemo()
-		{
-			Angle angle1 = Angle.FromHours(Angle.ToTotalHours(9, 14, 55.8));
-			double degrees = angle1;
-			string lf = angle1.ToLongFormat();
-			string sf = angle1.ToShortFormat();
-			string hf = angle1.ToHourFormat();
+			SunriseSunsetDemo();
 		}
 
 		static void SunriseSunsetDemo()

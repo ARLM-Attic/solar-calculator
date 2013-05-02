@@ -23,10 +23,11 @@ namespace Innovative.SolarCalculator
 	public class SolarTimes
 	{
 		private DateTimeOffset _forDate = DateTimeOffset.MinValue;
-		private double _atmosphericRefraction = 0.833;
-		private double _longitude = 0;
-		private double _latitude = 0;
+		private Angle _atmosphericRefraction = new Angle(0.833d);
+		private Angle _longitude = 0d;
+		private Angle _latitude = 0d;
 
+		#region Contructors
 		/// <summary>
 		/// Creates a default instance of the SolarTimes object.
 		/// </summary>
@@ -50,7 +51,7 @@ namespace Innovative.SolarCalculator
 		/// <param name="forDate">Specifies the Date for which the sunrise and sunset will be calculated.</param>
 		/// <param name="latitude">Specifies the angular measurement of north-south location on Earth's surface.</param>
 		/// <param name="longitude">Specifies the angular measurement of east-west location on Earth's surface.</param>
-		public SolarTimes(DateTimeOffset forDate, double latitude, double longitude)
+		public SolarTimes(DateTimeOffset forDate, Angle latitude, Angle longitude)
 		{
 			this.ForDate = forDate;
 			this.Latitude = latitude;
@@ -64,13 +65,15 @@ namespace Innovative.SolarCalculator
 		/// <param name="timeZoneOffset">Specifies the time zone offset for the specified date in hours.</param>
 		/// <param name="latitude">Specifies the angular measurement of north-south location on Earth's surface.</param>
 		/// <param name="longitude">Specifies the angular measurement of east-west location on Earth's surface.</param>
-		public SolarTimes(DateTime forDate, int timeZoneOffset, double latitude, double longitude)
+		public SolarTimes(DateTime forDate, int timeZoneOffset, Angle latitude, Angle longitude)
 		{
 			this.ForDate = new DateTimeOffset(forDate, TimeSpan.FromHours(timeZoneOffset));
 			this.Latitude = latitude;
 			this.Longitude = longitude;
 		}
+		#endregion
 
+		#region Public Members
 		/// <summary>
 		/// Specifies the Date for which the sunrise and sunset will be calculated.
 		/// </summary>
@@ -94,7 +97,7 @@ namespace Innovative.SolarCalculator
 		/// solar calculator conforms to the international standard, with east longitude positive.
 		/// (Spreadsheet Column B, Row 4)
 		/// </summary>
-		public double Longitude
+		public Angle Longitude
 		{
 			get
 			{
@@ -102,7 +105,7 @@ namespace Innovative.SolarCalculator
 			}
 			set
 			{
-				if (value >= -180.0 && value <= 180.0)
+				if (value >= -180d && value <= 180d)
 				{
 					_longitude = value;
 				}
@@ -120,7 +123,7 @@ namespace Innovative.SolarCalculator
 		/// northern hemisphere and a negative value in the southern hemisphere.
 		/// (Spreadsheet Column B, Row 3)
 		/// </summary>
-		public double Latitude
+		public Angle Latitude
 		{
 			get
 			{
@@ -128,7 +131,7 @@ namespace Innovative.SolarCalculator
 			}
 			set
 			{
-				if (value >= -90.0 && value <= 90.0)
+				if (value >= -90d && value <= 90d)
 				{
 					_latitude = value;
 				}
@@ -164,7 +167,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4.0 / 1440.0;
+				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4d / 1440d;
 				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -181,12 +184,31 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4.0 / 1440.0;
+				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4d / 1440d;
 				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
 			}
 		}
+
+		/// <summary>
+		/// As light from the sun (or another celestial body) travels from the vacuum of space into Earth's atmosphere, the 
+		/// path of the light is bent due to refraction. This causes stars and planets near the horizon to appear higher in 
+		/// the sky than they actually are, and explains how the sun can still be visible after it has physically passed 
+		/// beyond the horizon at sunset. See also apparent sunrise.
+		/// </summary>
+		public Angle AtmosphericRefraction
+		{
+			get
+			{
+				return _atmosphericRefraction;
+			}
+			set
+			{
+				_atmosphericRefraction = value;
+			}
+		}
+		#endregion
 
 		#region Computational Members
 		/// <summary>
@@ -197,7 +219,7 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
 				// ***
 				// *** .1 / 24
@@ -219,12 +241,12 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
 				// ***
 				// *** this.TimePastLocalMidnight was removed since the time is in ForDate
 				// ***
-				returnValue = ExcelFormulae.ToExcelDateValue(this.ForDate.Date) + 2415018.5 - (this.TimeZoneOffset / 24.0);
+				returnValue = ExcelFormulae.ToExcelDateValue(this.ForDate.Date) + 2415018.5d - (this.TimeZoneOffset / 24d);
 
 				return returnValue;
 			}
@@ -242,9 +264,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
-				returnValue = (this.JulianDay - 2451545.0) / 36525.0;
+				returnValue = (this.JulianDay - 2451545d) / 36525d;
 
 				return returnValue;
 			}
@@ -254,13 +276,13 @@ namespace Innovative.SolarCalculator
 		/// Sun's Geometric Mean Longitude (degrees): Geometric Mean Ecliptic Longitude of Sun.
 		/// (Spreadsheet Column I)
 		/// </summary>
-		public double SunGeometricMeanLongitude
+		public Angle SunGeometricMeanLongitude
 		{
 			get
 			{
-				double returnValue = 0.0;
+				Angle returnValue = 0d;
 
-				returnValue = ExcelFormulae.Mod(280.46646 + this.JulianCentury * (36000.76983 + this.JulianCentury * 0.0003032), 360.0);
+				returnValue = new Angle(ExcelFormulae.Mod(280.46646d + this.JulianCentury * (36000.76983d + this.JulianCentury * 0.0003032d), 360d));
 
 				return returnValue;
 			}
@@ -270,13 +292,13 @@ namespace Innovative.SolarCalculator
 		/// Sun's Mean Anomaly (degrees): Position of Sun relative to perigee
 		/// (Spreadsheet Column J)
 		/// </summary>
-		public double SunMeanAnomaly
+		public Angle SunMeanAnomaly
 		{
 			get
 			{
-				double returnValue = 0.0;
+				Angle returnValue = 0d;
 
-				returnValue = 357.52911 + this.JulianCentury * (35999.05029 - 0.0001537 * this.JulianCentury);
+				returnValue = new Angle(357.52911d + this.JulianCentury * (35999.05029d - 0.0001537d * this.JulianCentury));
 
 				return returnValue;
 			}
@@ -292,9 +314,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
-				returnValue = 0.016708634 - this.JulianCentury * (0.000042037 + 0.0000001267 * this.JulianCentury);
+				returnValue = 0.016708634d - this.JulianCentury * (0.000042037d + 0.0000001267d * this.JulianCentury);
 
 				return returnValue;
 			}
@@ -304,45 +326,46 @@ namespace Innovative.SolarCalculator
 		/// Sun Equation of the Center: Difference between mean anomaly and true anomaly.
 		/// (Spreadsheet Column L)
 		/// </summary>
-		public double SunEquationOfCenter
+		public Angle SunEquationOfCenter
 		{
 			get
 			{
-				double returnValue = 0.0;
+				Angle returnValue = 0d;
 
-				returnValue = Math.Sin(Angle.ToRadians(SunMeanAnomaly)) * (1.914602 - this.JulianCentury * (0.004817 + 0.000014 * this.JulianCentury)) + Math.Sin(Angle.ToRadians(2.0 * SunMeanAnomaly)) * (0.019993 - 0.000101 * JulianCentury) + Math.Sin(Angle.ToRadians(3.0 * this.SunMeanAnomaly)) * 0.000289;
+				returnValue = new Angle(Math.Sin(this.SunMeanAnomaly.Radians) * (1.914602d - this.JulianCentury * (0.004817d + 0.000014d * this.JulianCentury)) + Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(2d)) * (0.019993d - 0.000101d * JulianCentury) + Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(3d)) * 0.000289d);
 
 				return returnValue;
 			}
 		}
 
 		/// <summary>
-		/// Sun True Long (degrees)
+		/// Sun True Longitude (degrees)
 		/// (Spreadsheet Column M)
 		/// </summary>
-		public double SunTrueLongitude
+		public Angle SunTrueLongitude
 		{
 			get
 			{
-				double returnValue = 0.0;
+				Angle returnValue = 0d;
 
-				returnValue = this.SunGeometricMeanLongitude + this.SunEquationOfCenter;
+				returnValue = new Angle(this.SunGeometricMeanLongitude + this.SunEquationOfCenter);
 
 				return returnValue;
 			}
 		}
 
 		/// <summary>
-		/// Sun Apparent Longitude (deg)
+		/// Sun Apparent Longitude (degrees)
 		/// (Spreadsheet Column P)
 		/// </summary>
-		public double SunApparentLongitude
+		public Angle SunApparentLongitude
 		{
 			get
 			{
-				double returnValue = 0.0;
+				Angle returnValue = 0d;
 
-				returnValue = this.SunTrueLongitude - 0.00569 - 0.00478 * Math.Sin(Angle.ToRadians(125.04 - 1934.136 * this.JulianCentury));
+				Angle a1 = new Angle(125.04d - 1934.136d * this.JulianCentury);
+				returnValue = new Angle(this.SunTrueLongitude - 0.00569d - 0.00478d * Math.Sin(a1.Radians));
 
 				return returnValue;
 			}
@@ -352,13 +375,38 @@ namespace Innovative.SolarCalculator
 		/// Mean Ecliptic Obliquity (degrees): Inclination of ecliptic plane w.r.t. celestial equator
 		/// (Spreadsheet Column Q)
 		/// </summary>
-		public double MeanEclipticObliquity
+		public Angle MeanEclipticObliquity
 		{
 			get
 			{
-				double returnValue = 0.0;
+				Angle returnValue = 0d;
 
-				returnValue = 23.0 + (26.0 + ((21.448 - this.JulianCentury * (46.815 + this.JulianCentury * (0.00059 - this.JulianCentury * 0.001813)))) / 60.0) / 60.0;
+				// ***
+				// *** Formula 22.3 from Page 147 of Astronomical Algorithms, Second Edition (Jean Meeus)
+				// ***
+				//double u = this.JulianCentury / 100d;
+				//Angle a1 = new Angle(23, 26, 21.448d);
+				//Angle a2 = new Angle(0, 4680, .93d);
+
+				//returnValue = new Angle
+				//			(
+				//				a1
+				//			  - (a2 * u)
+				//			  - (1.55d * Math.Pow(u, 2))
+				//			  + (1999.25d * Math.Pow(u, 3))
+				//			  - (51.38d * Math.Pow(u, 4))
+				//			  - (249.67d * Math.Pow(u, 5))
+				//			  - (39.05d * Math.Pow(u, 6))
+				//			  + (7.12d * Math.Pow(u, 7))
+				//			  + (27.87d * Math.Pow(u, 8))
+				//			  + (5.79d * Math.Pow(u, 9))
+				//			  + (2.45d * Math.Pow(u, 10))
+				//			);
+
+				// ***
+				// *** Original spreadsheet formula based on 22.2 same page of book
+				// ***
+				returnValue = 23d + (26d + ((21.448d - this.JulianCentury * (46.815d + this.JulianCentury * (0.00059d - this.JulianCentury * 0.001813d)))) / 60d) / 60d;
 
 				return returnValue;
 			}
@@ -368,13 +416,14 @@ namespace Innovative.SolarCalculator
 		/// Obliquity Correction (degrees)
 		/// (Spreadsheet Column R)
 		/// </summary>
-		public double ObliquityCorrection
+		public Angle ObliquityCorrection
 		{
 			get
 			{
-				double returnValue = 0.0;
+				Angle returnValue = 0d;
 
-				returnValue = this.MeanEclipticObliquity + 0.00256 * Math.Cos(Angle.ToRadians(125.04 - 1934.136 * this.JulianCentury));
+				Angle a1 = 125.04d - 1934.136d * this.JulianCentury;
+				returnValue = new Angle(this.MeanEclipticObliquity + 0.00256d * Math.Cos(a1.Radians));
 
 				return returnValue;
 			}
@@ -386,13 +435,14 @@ namespace Innovative.SolarCalculator
 		/// approximately +23.5 (North) in June to -23.5 (South) in December.
 		/// (Spreadsheet Column T)
 		/// </summary>
-		public double SolarDeclination
+		public Angle SolarDeclination
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
-				returnValue = Angle.ToDegrees(Math.Asin(Math.Sin(Angle.ToRadians(this.ObliquityCorrection)) * Math.Sin(Angle.ToRadians(this.SunApparentLongitude))));
+				double radians = Math.Asin(Math.Sin(this.ObliquityCorrection.Radians) * Math.Sin(this.SunApparentLongitude.Radians));
+				returnValue = Angle.FromRadians(radians);
 
 				return returnValue;
 			}
@@ -406,9 +456,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
-				returnValue = Math.Tan(Angle.ToRadians(this.ObliquityCorrection / 2.0)) * Math.Tan(Angle.ToRadians(this.ObliquityCorrection / 2.0));
+				returnValue = Math.Tan(this.ObliquityCorrection.RadiansDivided(2d)) * Math.Tan(this.ObliquityCorrection.RadiansDivided(2d));
 
 				return returnValue;
 			}
@@ -424,9 +474,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
-				returnValue = 4.0 * Angle.ToDegrees(this.VarY * Math.Sin(2.0 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 2.0 * this.EccentricityOfEarthOrbit * Math.Sin(Angle.ToRadians(this.SunMeanAnomaly)) + 4.0 * this.EccentricityOfEarthOrbit * this.VarY * Math.Sin(Angle.ToRadians(this.SunMeanAnomaly)) * Math.Cos(2.0 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 0.5 * this.VarY * this.VarY * Math.Sin(4.0 * Angle.ToRadians(this.SunGeometricMeanLongitude)) - 1.25 * this.EccentricityOfEarthOrbit * this.EccentricityOfEarthOrbit * Math.Sin(2.0 * Angle.ToRadians(this.SunMeanAnomaly)));
+				returnValue = 4d * Angle.ToDegrees(this.VarY * Math.Sin(2d * this.SunGeometricMeanLongitude.Radians) - 2d * this.EccentricityOfEarthOrbit * Math.Sin(this.SunMeanAnomaly.Radians) + 4d * this.EccentricityOfEarthOrbit * this.VarY * Math.Sin(this.SunMeanAnomaly.Radians) * Math.Cos(2d * this.SunGeometricMeanLongitude.Radians) - 0.5d * this.VarY * this.VarY * Math.Sin(4d * this.SunGeometricMeanLongitude.Radians) - 1.25d * this.EccentricityOfEarthOrbit * this.EccentricityOfEarthOrbit * Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(2d)));
 
 				return returnValue;
 			}
@@ -436,13 +486,15 @@ namespace Innovative.SolarCalculator
 		/// HA Sunrise (degrees)
 		/// (Spreadsheet Column W)
 		/// </summary>
-		public double HourAngleSunrise
+		public Angle HourAngleSunrise
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
-				returnValue = Angle.ToDegrees(Math.Acos(Math.Cos(Angle.ToRadians((90.0 + this.AtmosphericRefraction))) / (Math.Cos(Angle.ToRadians(this.Latitude)) * Math.Cos(Angle.ToRadians(this.SolarDeclination))) - Math.Tan(Angle.ToRadians(this.Latitude)) * Math.Tan(Angle.ToRadians(this.SolarDeclination))));
+				Angle a1 = 90d + this.AtmosphericRefraction;
+				double radians = Math.Acos(Math.Cos(a1.Radians) / (Math.Cos(this.Latitude.Radians) * Math.Cos(this.SolarDeclination.Radians)) - Math.Tan(this.Latitude.Radians) * Math.Tan(this.SolarDeclination.Radians));
+				returnValue = Angle.FromRadians(radians);
 
 				return returnValue;
 			}
@@ -461,7 +513,7 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.Now.Date;
 
-				double dayFraction = (720.0 - (4.0 * this.Longitude) - this.EquationOfTime + (this.TimeZoneOffset * 60.0)) / 1440.0;
+				double dayFraction = (720d - (4d * this.Longitude) - this.EquationOfTime + (this.TimeZoneOffset * 60d)) / 1440d;
 				returnValue = DateTime.Now.Date.Add(TimeSpan.FromDays(dayFraction));
 
 				return returnValue;
@@ -478,28 +530,9 @@ namespace Innovative.SolarCalculator
 			{
 				TimeSpan returnValue = TimeSpan.Zero;
 
-				returnValue = TimeSpan.FromMinutes(8.0 * this.HourAngleSunrise);
+				returnValue = TimeSpan.FromMinutes(8d * this.HourAngleSunrise);
 
 				return returnValue;
-			}
-		}
-
-		/// <summary>
-		/// As light from the sun (or another celestial body) travels from the vacuum of space into Earth's atmosphere, the 
-		/// path of the light is bent due to refraction. This causes stars and planets near the horizon to appear higher in 
-		/// the sky than they actually are, and explains how the sun can still be visible after it has physically passed 
-		/// beyond the horizon at sunset. See also apparent sunrise. Click here for a graph of atmospheric refraction vs. 
-		/// elevation.
-		/// </summary>
-		public double AtmosphericRefraction
-		{
-			get
-			{
-				return _atmosphericRefraction;
-			}
-			set
-			{
-				_atmosphericRefraction = value;
 			}
 		}
 		#endregion
@@ -539,9 +572,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0.0;
+				double returnValue = 0d;
 
-				returnValue = ExcelFormulae.Mod(this.TimePastLocalMidnight * 1440.0 + this.EquationOfTime + 4.0 * this.Longitude - 60.0 * this.TimeZoneOffset, 1440.0);
+				returnValue = ExcelFormulae.Mod(this.TimePastLocalMidnight * 1440d + this.EquationOfTime + 4d * this.Longitude - 60d * this.TimeZoneOffset, 1440d);
 
 				return returnValue;
 			}

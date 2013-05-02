@@ -68,7 +68,7 @@ namespace System
 		/// Gets the arcminute portion of the value of
 		/// this instance in degrees.
 		/// </summary>
-		public int ArcmMinute
+		public int ArcMinute
 		{
 			get
 			{
@@ -460,7 +460,7 @@ namespace System
 		/// <returns>The long format string representation of the value of this instance.</returns>
 		public string ToLongFormat()
 		{
-			return string.Format("{0}°{1}´{2:0´´.#####}", this.Degrees, this.ArcmMinute, this.Arcsecond);
+			return string.Format("{0}°{1}´{2:0´´.#####}", this.Degrees, this.ArcMinute, this.Arcsecond);
 		}
 
 		//public string ToHourFormat()

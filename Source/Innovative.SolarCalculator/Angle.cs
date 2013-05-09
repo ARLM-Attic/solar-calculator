@@ -156,10 +156,10 @@ namespace System
 		}
 
 		/// <summary>
-		///  Returns a value indicating whether this instance and a specified System.Angle
+		///  Returns a value indicating whether this instance and a specified object
 		/// object represent the same value.
 		/// </summary>
-		/// <param name="obj">A System.Angle object to compare to this instance.</param>
+		/// <param name="obj">An object to compare to this instance.</param>
 		/// <returns>True if obj is equal to this instance; False otherwise.</returns>
 		public override bool Equals(object obj)
 		{
@@ -175,7 +175,7 @@ namespace System
 		}
 
 		/// <summary>
-		///Returns the hash code for this instance.
+		/// Returns the hash code for this instance.
 		/// </summary>
 		/// <returns>A 32-bit signed integer hash code.</returns>
 		public override int GetHashCode()

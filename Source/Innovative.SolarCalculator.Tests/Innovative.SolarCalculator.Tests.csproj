@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Innovative.Geometry">
+      <HintPath>..\packages\Angle.1.0.1\lib\portable-net4+sl4+wp7+win8\Innovative.Geometry.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -60,7 +63,6 @@
   <ItemGroup>
     <Compile Include="CsharpMathTests.cs" />
     <Compile Include="ExcelFormulaeTests.cs" />
-    <Compile Include="CustomMathTests.cs" />
     <Compile Include="CsharpExcelTests.cs" />
     <Compile Include="SolarCalculatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +79,7 @@
     <None Include="NOAA Solar Calculations Test Data.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

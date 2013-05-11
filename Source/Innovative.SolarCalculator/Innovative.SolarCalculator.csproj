@@ -39,10 +39,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <None Include="SolarCalculator.1.0.6.nupkg" />
+    <None Include="packages.config" />
+    <None Include="SolarCalculator.1.0.7.nupkg" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Angle.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="ExcelFormulae.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -50,6 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Innovative.Geometry">
+      <HintPath>..\packages\Angle.1.0.1\lib\portable-net4+sl4+wp7+win8\Innovative.Geometry.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

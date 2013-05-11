@@ -14,6 +14,7 @@
 // *** do not use the software. Full license details can be found at https://solarcalculator.codeplex.com/license.
 // ***
 using System;
+using Innovative.Geometry;
 
 namespace Innovative.SolarCalculator
 {

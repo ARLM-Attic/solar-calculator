@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Angle</id>
+    <version>1.0.1</version>
+    <title>Angle</title>
+    <authors>Daniel M. Porrey</authors>
+    <owners>Daniel M. Porrey</owners>
+    <licenseUrl>https://angle.codeplex.com/license</licenseUrl>
+    <projectUrl>https://angle.codeplex.com/</projectUrl>
+    <iconUrl>https://www.codeplex.com/Download?ProjectName=angle&amp;DownloadId=678439</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Defines a type for a geometric angle that allows various ways of setting and converting the values from and to different modes. Angle inherently is a double and can be used in place of a double when specifically referring to a geometric angle with the value being the degrees of the angle.</description>
+    <summary>Defines a type for a geometric angle that allows various ways of setting and converting the values from and to different modes.</summary>
+    <releaseNotes>v1.0.1
+CHanged namespace to Innovative.Geometry</releaseNotes>
+    <copyright>Copyright ©  2013 Daniel M. Porrey</copyright>
+    <language>en-US</language>
+    <tags>Angle Math Arcminute Arcsecond Degree</tags>
+  </metadata>
+</package>

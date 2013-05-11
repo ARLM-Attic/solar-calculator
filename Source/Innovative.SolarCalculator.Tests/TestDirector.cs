@@ -15,6 +15,7 @@
 // ***
 using System;
 using System.Data;
+using Innovative.Geometry;
 
 namespace Innovative.SolarCalculator.Tests
 {

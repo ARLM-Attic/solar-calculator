@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator", "Innovative.SolarCalculator\Innovative.SolarCalculator.csproj", "{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Tests", "Innovative.SolarCalculator.Tests\Innovative.SolarCalculator.Tests.csproj", "{C07CE1CD-32DE-4567-BD96-FE385E1304DD}"

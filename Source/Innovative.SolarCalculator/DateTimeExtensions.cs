@@ -33,9 +33,13 @@ namespace System
 		/// </summary>
 		/// <param name="value">A DateTime value that will be converted to the Ole Automation date.</param>
 		/// <returns>Gets a value that represents the Ole Automation date for the given DateTime value.</returns>
-		public static double ToOleAutomationDate(this DateTime value)
+#if NET20
+		public static decimal ToOleAutomationDate(DateTime value)
+#else
+		public static decimal ToOleAutomationDate(this DateTime value)
+#endif
 		{
-			return value.Subtract(new DateTime(1899, 12, 30).Date).TotalDays;
+			return (decimal)value.Subtract(new DateTime(1899, 12, 30).Date).TotalDays;
 		}
 	}
 }

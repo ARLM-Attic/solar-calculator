@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Innovative.SolarCalculator.Tests</RootNamespace>
     <AssemblyName>Innovative.SolarCalculator.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -20,13 +20,14 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;PORTABLE40</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -34,13 +35,13 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;PORTABLE40</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Innovative.Geometry">
-      <HintPath>..\packages\Angle.1.0.1\lib\portable-net4+sl4+wp7+win8\Innovative.Geometry.dll</HintPath>
+      <HintPath>..\packages\Angle.1.0.2.1\lib\net45\Innovative.Geometry.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -62,6 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CsharpMathTests.cs" />
+    <Compile Include="CustomAssert.cs" />
     <Compile Include="ExcelFormulaeTests.cs" />
     <Compile Include="CsharpExcelTests.cs" />
     <Compile Include="SolarCalculatorTests.cs" />
@@ -69,9 +71,9 @@
     <Compile Include="TestDirector.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Innovative.SolarCalculator\Innovative.SolarCalculator.csproj">
+    <ProjectReference Include="..\Innovative.SolarCalculator\Innovative.SolarCalculator.Portable40.csproj">
       <Project>{7fc2a825-67f0-42f3-ae24-8a216a85b5fb}</Project>
-      <Name>Innovative.SolarCalculator</Name>
+      <Name>Innovative.SolarCalculator.Portable40</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

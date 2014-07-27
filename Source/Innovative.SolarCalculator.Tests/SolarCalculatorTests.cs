@@ -16,7 +16,21 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Innovative.SolarCalculator.Tests
+#if NET20
+namespace Innovative.SolarCalculator.Net20.Tests
+#elif NET35
+namespace Innovative.SolarCalculator.Net35.Tests
+#elif NET40
+namespace Innovative.SolarCalculator.Net40.Tests
+#elif NET45
+namespace Innovative.SolarCalculator.Net45.Tests
+#elif NET451
+namespace Innovative.SolarCalculator.Net451.Tests
+#elif PORTABLE40
+namespace Innovative.SolarCalculator.Portable40.Tests
+#elif PORTABLE45
+namespace Innovative.SolarCalculator.Portable40.Tests
+#endif
 {
 	[TestClass]
 	public class SolarCalculatorTests
@@ -42,11 +56,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void JulianDayComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["JulianDay"]);
-			double actualValue = solarTimes.JulianDay;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["JulianDay"]);
+			decimal actualValue = solarTimes.JulianDay;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Date (Column F) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -56,11 +70,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void JulianCenturyComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["JulianCentury"]);
-			double actualValue = solarTimes.JulianCentury;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["JulianCentury"]);
+			decimal actualValue = solarTimes.JulianCentury;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The JulianCentury (Column G) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -70,11 +84,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void SunGeometricMeanLongitudeComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["GeomMeanLongSun"]);
-			double actualValue = solarTimes.SunGeometricMeanLongitude;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["GeomMeanLongSun"]);
+			decimal actualValue = solarTimes.SunGeometricMeanLongitude;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Julian Century (Column I) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -84,11 +98,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void SunMeanAnomalyComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["GeomMeanAnomSun"]);
-			double actualValue = solarTimes.SunMeanAnomaly;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["GeomMeanAnomSun"]);
+			decimal actualValue = solarTimes.SunMeanAnomaly;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Mean Anomaly (Column J) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -98,11 +112,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void EccentricityOfEarthOrbitComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["EccentEarthOrbit"]);
-			double actualValue = solarTimes.EccentricityOfEarthOrbit;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["EccentEarthOrbit"]);
+			decimal actualValue = solarTimes.EccentricityOfEarthOrbit;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Eccentricity Of Earth Orbit (Column K) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -112,11 +126,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void SunEquationOfCenterComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SunEqofCtr"]);
-			double actualValue = solarTimes.SunEquationOfCenter;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["SunEqofCtr"]);
+			decimal actualValue = solarTimes.SunEquationOfCenter;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column L) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -126,11 +140,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void SunTrueLongitudeComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SunTrueLong"]);
-			double actualValue = solarTimes.SunTrueLongitude;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["SunTrueLong"]);
+			decimal actualValue = solarTimes.SunTrueLongitude;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun True Longitude (Column M) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -140,11 +154,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void SunApparentLongitudeComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SunAppLong"]);
-			double actualValue = solarTimes.SunApparentLongitude;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["SunAppLong"]);
+			decimal actualValue = solarTimes.SunApparentLongitude;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Sun Apparent Longitude (Column P) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -154,11 +168,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void MeanEclipticObliquityComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["MeanObliqEcliptic"]);
-			double actualValue = solarTimes.MeanEclipticObliquity;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["MeanObliqEcliptic"]);
+			decimal actualValue = solarTimes.MeanEclipticObliquity;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Mean Ecliptic Obliquity (Column Q) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -168,11 +182,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void ObliquityCorrectionComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["ObliqCorr"]);
-			double actualValue = solarTimes.ObliquityCorrection;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["ObliqCorr"]);
+			decimal actualValue = solarTimes.ObliquityCorrection;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Obliquity Correction (Column R) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -182,11 +196,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void SolarDeclinationComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SunDeclin"]);
-			double actualValue = solarTimes.SolarDeclination;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["SunDeclin"]);
+			decimal actualValue = solarTimes.SolarDeclination;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Solar Declination (Column T) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -196,11 +210,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void VarYComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["vary"]);
-			double actualValue = solarTimes.VarY;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["vary"]);
+			decimal actualValue = solarTimes.VarY;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Var Y (Column U) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -210,11 +224,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void EquationOfTimeComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["EqofTime"]);
-			double actualValue = solarTimes.EquationOfTime;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["EqofTime"]);
+			decimal actualValue = solarTimes.EquationOfTime;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Equation Of Time (Column V) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -224,11 +238,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void HourAngleSunriseComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["HaSunrise"]);
-			double actualValue = solarTimes.HourAngleSunrise;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["HaSunrise"]);
+			decimal actualValue = solarTimes.HourAngleSunrise;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The Hour Angle Sunrise (Column W) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 
 		[TestMethod]
@@ -306,11 +320,11 @@ namespace Innovative.SolarCalculator.Tests
 		public void TrueSolarTimeComparisonTest()
 		{
 			SolarTimes solarTimes = TestDirector.SolarTimesInstance(this.TestContext.DataRow);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["TrueSolarTime"]);
-			double actualValue = solarTimes.TrueSolarTime;
-			double difference = expectedValue - actualValue;
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["TrueSolarTime"]);
+			decimal actualValue = solarTimes.TrueSolarTime;
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.SolarDoubleDelta, string.Format("The True Solar Time (Column AB) calculation does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.SolarDecimalDelta);
 		}
 	}
 }

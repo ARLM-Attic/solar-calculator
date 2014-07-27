@@ -16,7 +16,23 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Innovative.SolarCalculator.Tests
+#if NET20
+namespace Innovative.SolarCalculator.Net20.Tests
+#elif NET35
+namespace Innovative.SolarCalculator.Net35.Tests
+#elif NET40
+namespace Innovative.SolarCalculator.Net40.Tests
+#elif NET45
+namespace Innovative.SolarCalculator.Net45.Tests
+#elif NET451
+namespace Innovative.SolarCalculator.Net451.Tests
+#elif PORTABLE40
+namespace Innovative.SolarCalculator.Portable40.Tests
+#endif
+
+#if PORTABLE45
+namespace Innovative.SolarCalculator.Portable40.Tests
+#endif
 {
 	[TestClass]
 	public class ExcelFormulaeTests
@@ -41,14 +57,14 @@ namespace Innovative.SolarCalculator.Tests
 		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void ExcelModuloComparisons()
 		{
-			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
-			double value2 = Convert.ToDouble(this.TestContext.DataRow["VALUE2"]);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["MOD"]);
+			decimal value1 = Convert.ToDecimal(this.TestContext.DataRow["VALUE1"]);
+			decimal value2 = Convert.ToDecimal(this.TestContext.DataRow["VALUE2"]);
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["MOD"]);
 
-			double actualValue = ExcelFormulae.Mod(value1, value2);
-			double difference = expectedValue - actualValue;
+			decimal actualValue = ExcelFormulae.Mod(value1, value2);
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("The Modulo (% operator) calculation in C# does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDecimalDelta);
 		}
 
 		[TestMethod]
@@ -58,12 +74,12 @@ namespace Innovative.SolarCalculator.Tests
 		public void ExcelDateValueTest()
 		{
 			DateTime value1 = Convert.ToDateTime(this.TestContext.DataRow["DATE"]);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["DATEVALUE"]);
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["DATEVALUE"]);
 
-			double actualValue = ExcelFormulae.ToExcelDateValue(value1);
-			double difference = expectedValue - actualValue;
+			decimal actualValue = ExcelFormulae.ToExcelDateValue(value1);
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.MathDoubleDelta, string.Format("ToRadians() does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDecimalDelta);
 		}
 	}
 }

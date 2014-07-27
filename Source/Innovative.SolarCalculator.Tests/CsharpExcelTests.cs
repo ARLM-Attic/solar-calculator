@@ -16,7 +16,21 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Innovative.SolarCalculator.Tests
+#if NET20
+namespace Innovative.SolarCalculator.Net20.Tests
+#elif NET35
+namespace Innovative.SolarCalculator.Net35.Tests
+#elif NET40
+namespace Innovative.SolarCalculator.Net40.Tests
+#elif NET45
+namespace Innovative.SolarCalculator.Net45.Tests
+#elif NET451
+namespace Innovative.SolarCalculator.Net451.Tests
+#elif PORTABLE40
+namespace Innovative.SolarCalculator.Portable40.Tests
+#elif PORTABLE45
+namespace Innovative.SolarCalculator.Portable40.Tests
+#endif
 {
 	[TestClass]
 	public class CsharpExcelTests
@@ -41,13 +55,13 @@ namespace Innovative.SolarCalculator.Tests
 		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelSineComparisons()
 		{
-			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["SIN"]);
+			decimal value1 = Convert.ToDecimal(this.TestContext.DataRow["VALUE1"]);
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["SIN"]);
 
-			double actualValue = Math.Sin(value1);
-			double difference = expectedValue - actualValue;
+			decimal actualValue = Universal.Math.Sin(value1);
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The SIN calculation in C# does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.CSharpExcelDecimalDelta);
 		}
 
 		[TestMethod]
@@ -56,14 +70,14 @@ namespace Innovative.SolarCalculator.Tests
 		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelASineComparisons()
 		{
-			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
-			double sin = Convert.ToDouble(this.TestContext.DataRow["SIN"]);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["ASIN"]);
+			decimal value1 = Convert.ToDecimal(this.TestContext.DataRow["VALUE1"]);
+			decimal sin = Convert.ToDecimal(this.TestContext.DataRow["SIN"]);
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["ASIN"]);
 
-			double actualValue = Math.Asin(sin);
-			double difference = expectedValue - actualValue;
+			decimal actualValue = Universal.Math.Asin(sin);
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The ASIN calculation in C# does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.CSharpExcelDecimalDelta);
 		}
 
 		[TestMethod]
@@ -72,14 +86,14 @@ namespace Innovative.SolarCalculator.Tests
 		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelCosineComparisons()
 		{
-			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
-			double value2 = Convert.ToDouble(this.TestContext.DataRow["VALUE2"]);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["COS"]);
+			decimal value1 = Convert.ToDecimal(this.TestContext.DataRow["VALUE1"]);
+			decimal value2 = Convert.ToDecimal(this.TestContext.DataRow["VALUE2"]);
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["COS"]);
 
-			double actualValue = Math.Cos(value1);
-			double difference = expectedValue - actualValue;
+			decimal actualValue = Universal.Math.Cos(value1);
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The COS calculation in C# does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.CSharpExcelDecimalDelta);
 		}
 
 		[TestMethod]
@@ -88,15 +102,15 @@ namespace Innovative.SolarCalculator.Tests
 		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelACosineComparisons()
 		{
-			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
-			double value2 = Convert.ToDouble(this.TestContext.DataRow["VALUE2"]);
-			double cos = Convert.ToDouble(this.TestContext.DataRow["COS"]);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["ACOS"]);
+			decimal value1 = Convert.ToDecimal(this.TestContext.DataRow["VALUE1"]);
+			decimal value2 = Convert.ToDecimal(this.TestContext.DataRow["VALUE2"]);
+			decimal cos = Convert.ToDecimal(this.TestContext.DataRow["COS"]);
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["ACOS"]);
 
-			double actualValue = Math.Acos(cos);
-			double difference = expectedValue - actualValue;
+			decimal actualValue = Universal.Math.Acos(cos);
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The ACOS calculation in C# does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.CSharpExcelDecimalDelta);
 		}
 
 		[TestMethod]
@@ -105,14 +119,14 @@ namespace Innovative.SolarCalculator.Tests
 		[DataSource("System.Data.OleDb", "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=NOAA Solar Calculations Test Data.xlsx;Extended Properties=\"Excel 12.0;HDR=YES\"", "ExcelFormulas$", DataAccessMethod.Sequential)]
 		public void CsharpExcelTangentComparisons()
 		{
-			double value1 = Convert.ToDouble(this.TestContext.DataRow["VALUE1"]);
-			double value2 = Convert.ToDouble(this.TestContext.DataRow["VALUE2"]);
-			double expectedValue = Convert.ToDouble(this.TestContext.DataRow["TAN"]);
+			decimal value1 = Convert.ToDecimal(this.TestContext.DataRow["VALUE1"]);
+			decimal value2 = Convert.ToDecimal(this.TestContext.DataRow["VALUE2"]);
+			decimal expectedValue = Convert.ToDecimal(this.TestContext.DataRow["TAN"]);
 
-			double actualValue = Math.Tan(value1);
-			double difference = expectedValue - actualValue;
+			decimal actualValue = Universal.Math.Tan(value1);
+			decimal difference = expectedValue - actualValue;
 
-			Assert.AreEqual(expectedValue, actualValue, TestDirector.ExcelDoubleDelta, string.Format("The TAN calculation in C# does not match Excel. The difference is {0}", difference));
+			CustomAssert.AreEqual(expectedValue, actualValue, TestDirector.CSharpExcelDecimalDelta);
 		}
 	}
 }

@@ -7,8 +7,8 @@
         <member name="T:Innovative.Geometry.Angle">
             <summary>
             Defines a type for a geometric angle that allows various ways of setting and converting
-            the values from and to different modes. Angle inherently is a double and can be used in 
-            place of a double when specifically referring to a geometric angle with the value being
+            the values from and to different modes. Angle inherently is a decimal and can be used in 
+            place of a decimal when specifically referring to a geometric angle with the value being
             the degrees of the angle.
             </summary>
         </member>
@@ -17,6 +17,20 @@
             Initializes a new instance of the System.Angle class.
             </summary>
         </member>
+        <member name="M:Innovative.Geometry.Angle.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the System.Angle class to an angle specified in degrees
+            represented by an integer.
+            </summary>
+            <param name="degrees">The value of the angle in degrees.</param>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.#ctor(System.Decimal)">
+            <summary>
+            Initializes a new instance of the System.Angle class to an angle specified in degrees
+            represented by a decimal.
+            </summary>
+            <param name="degrees">The value of the angle in degrees.</param>
+        </member>
         <member name="M:Innovative.Geometry.Angle.#ctor(System.Double)">
             <summary>
             Initializes a new instance of the System.Angle class to an angle specified in degrees
@@ -24,7 +38,7 @@
             </summary>
             <param name="degrees">The value of the angle in degrees.</param>
         </member>
-        <member name="M:Innovative.Geometry.Angle.#ctor(System.Int32,System.Int32,System.Double)">
+        <member name="M:Innovative.Geometry.Angle.#ctor(System.Int32,System.Int32,System.Decimal)">
             <summary>
             Initializes a new instance of the System.Angle class to an angle with the whole part
             specified in degrees represented by a integer and the decimal part represented in 
@@ -35,7 +49,18 @@
             <param name="arcminute">The arcminute value, e.g., 14 from the angle 9° 14' 55.8''.</param>
             <param name="arcsecond">The arcsecond value, e.g., 55.8 from the angle 9° 14' 55.8''.</param>
         </member>
-        <member name="M:Innovative.Geometry.Angle.RadiansMultiplied(System.Double)">
+        <member name="M:Innovative.Geometry.Angle.#ctor(System.Int32,System.Int32,System.Double)">
+            <summary>
+            Initializes a new instance of the System.Angle class to an angle with the whole part
+            specified in degrees represented by a System.Int32 and the System.Double part represented
+            in Minutes and Seconds of an Arc. This allows an angle represented as 9° 14' 55.8'' to
+            be initialized.
+            </summary>
+            <param name="degrees">The whole value portion of the angle in degrees, e.g., 9 from the angle 9° 14' 55.8''.</param>
+            <param name="arcminute">The arcminute value, e.g., 14 from the angle 9° 14' 55.8''.</param>
+            <param name="arcsecond">The arcsecond value, e.g., 55.8 from the angle 9° 14' 55.8''.</param>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.RadiansMultiplied(System.Decimal)">
             <summary>
             Returns the value of this instance in Radian units by
             first multiplying the underlying value of the angle 
@@ -44,7 +69,7 @@
             equal to this.Radians * multiplier.
             </summary>
         </member>
-        <member name="M:Innovative.Geometry.Angle.RadiansDivided(System.Double)">
+        <member name="M:Innovative.Geometry.Angle.RadiansDivided(System.Decimal)">
             <summary>
             Returns the value of this instance in Radian units by
             first dividing the underlying value of the angle 
@@ -72,11 +97,25 @@
              </summary>
              <returns>A 32-bit signed integer hash code.</returns>
         </member>
+        <member name="M:Innovative.Geometry.Angle.op_Implicit(Innovative.Geometry.Angle)~System.Decimal">
+            <summary>
+            Defines an implicit conversion of a System.Angle object to a System.Decimal object.
+            </summary>
+            <param name="angle">The object to convert.</param>
+            <returns>The converted object.</returns>
+        </member>
         <member name="M:Innovative.Geometry.Angle.op_Implicit(Innovative.Geometry.Angle)~System.Double">
             <summary>
             Defines an implicit conversion of a System.Angle object to a System.Double object.
             </summary>
             <param name="angle">The object to convert.</param>
+            <returns>The converted object.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Implicit(System.Decimal)~Innovative.Geometry.Angle">
+            <summary>
+            Defines an implicit conversion of a System.Decimal object to a System.Angle object.
+            </summary>
+            <param name="degrees">The object to convert.</param>
             <returns>The converted object.</returns>
         </member>
         <member name="M:Innovative.Geometry.Angle.op_Implicit(System.Double)~Innovative.Geometry.Angle">
@@ -86,25 +125,134 @@
             <param name="degrees">The object to convert.</param>
             <returns>The converted object.</returns>
         </member>
-        <member name="M:Innovative.Geometry.Angle.ToDegrees(System.Int32,System.Int32,System.Double)">
+        <member name="M:Innovative.Geometry.Angle.op_Addition(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Adds two Angles.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>The result of the first Angle being added to the second Angle.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Subtraction(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Subtracts one Angle from another.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>The result of the second Angle being subtracted from the first Angle.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Multiply(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Multiplies two Angles.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>The result of the first Angle being multiplied by the second Angle.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Division(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Divides two Angles.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>The result of the first Angle being divided by the second Angle.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Modulus(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Calculates the modulo of two Angles.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>The result of the First Angle mod the Second Angle.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Increment(Innovative.Geometry.Angle)">
+            <summary>
+            Increments an Angle by 1 degree.
+            </summary>
+            <param name="a">The Angle to increment.</param>
+            <returns>The result of the Angle being incremented by 1 degree.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Decrement(Innovative.Geometry.Angle)">
+            <summary>
+            Decrements an Angle by 1 degree.
+            </summary>
+            <param name="a">The Angle to increment.</param>
+            <returns>The result of the Angle being decremented by 1 degree.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Equality(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Determines if two Angles are equal.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>True if the two angle are the same, False otherwise.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_Inequality(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Determines if two Angles are not equal.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>True if the two angle are the not same, False otherwise.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_GreaterThan(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Determines one Angle is greater than another Angle.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>True if the first Angle is greater than the second Angle, False otherwise.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_GreaterThanOrEqual(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Determines one Angle is greater than or equal to another Angle.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>True if the first Angle is greater than or equal to the second Angle, False otherwise.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_LessThan(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Determines one Angle is less than another Angle.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>True if the first Angle is less than the second Angle, False otherwise.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_LessThanOrEqual(Innovative.Geometry.Angle,Innovative.Geometry.Angle)">
+            <summary>
+            Determines one Angle is less than or equal to another Angle.
+            </summary>
+            <param name="a">The first Angle.</param>
+            <param name="b">The second Angle.</param>
+            <returns>True if the first Angle is less than or equal to the second Angle, False otherwise.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.op_LogicalNot(Innovative.Geometry.Angle)">
+            <summary>
+            Reverses the direction of an Angle by adding 180 degrees.
+            </summary>
+            <param name="a">The Angle to reverse.</param>
+            <returns>The result of the Angle being reversed.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.ToDegrees(System.Int32,System.Int32,System.Decimal)">
             <summary>
             Converts the value of an angle specified in degree, arcminute and arcsecond
-            values to a double-precision floating-point value of the angle. For example
-            an angle specified as as 9° 14' 55.8'' can be converted to a double.
+            values to a decimal-precision floating-point value of the angle. For example
+            an angle specified as as 9° 14' 55.8'' can be converted to a decimal.
             </summary>
             <param name="degrees">The whole value portion of the angle in degrees, e.g., 9 from the angle 9° 14' 55.8''.</param>
             <param name="arcminute">The arcminute value, e.g., 14 from the angle 9° 14' 55.8''.</param>
             <param name="arcsecond">The arcsecond value, e.g., 55.8 from the angle 9° 14' 55.8''.</param>
-            <returns>The double-precision floating-point value of the specified angle.</returns>
+            <returns>The decimal-precision floating-point value of the specified angle.</returns>
         </member>
-        <member name="M:Innovative.Geometry.Angle.ToDegrees(System.Double)">
+        <member name="M:Innovative.Geometry.Angle.ToDegrees(System.Decimal)">
             <summary>
             Converts a radian angle to degrees.
             </summary>
             <param name="radians">The angle in radian units.</param>
             <returns>The angle in degree units.</returns>
         </member>
-        <member name="M:Innovative.Geometry.Angle.ToRadians(System.Double)">
+        <member name="M:Innovative.Geometry.Angle.ToRadians(System.Decimal)">
             <summary>
             A radian is the measure of a central angle subtending an arc equal in length to the radius. This method 
             converts an angle measured in degrees to radian units.
@@ -112,13 +260,21 @@
             <param name="degrees">The angle in degree units.</param>
             <returns>The angle in radian units.</returns>
         </member>
-        <member name="M:Innovative.Geometry.Angle.FromRadians(System.Double)">
+        <member name="M:Innovative.Geometry.Angle.FromRadians(System.Decimal)">
             <summary>
             Creates an instance of the System.Angle class from the
             specified angle expressed in Radian units.
             </summary>
             <param name="radians">The angle in radian units.</param>
             <returns>A new instance of the System.Angle class.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Angle.GetDegrees(Innovative.Geometry.Angle)">
+            <summary>
+            Gets the whole number portion of the value of the given
+            instance of Angle.
+            </summary>
+            <param name="angle">An instance of System.Angle.</param>
+            <returns>An integer value representing the whole number portion of the angle.</returns>
         </member>
         <member name="M:Innovative.Geometry.Angle.GetArcminute(Innovative.Geometry.Angle)">
             <summary>
@@ -146,7 +302,7 @@
         <member name="M:Innovative.Geometry.Angle.Parse(System.String)">
             <summary>
             Converts the string representation of a angle expressed as a number to its 
-            double-precision floating-point number equivalent in degree units.
+            decimal-precision floating-point number equivalent in degree units.
             </summary>
             <param name="s">A string that contains a number to convert.</param>
             <returns>An instance of System.Angle instantiated with the parsed value.</returns>
@@ -154,7 +310,7 @@
         <member name="M:Innovative.Geometry.Angle.TryParse(System.String,Innovative.Geometry.Angle@)">
             <summary>
             Converts the string representation of a angle expressed as a number to its 
-            double-precision floating-point number equivalent in degree units. A return 
+            decimal-precision floating-point number equivalent in degree units. A return 
             value indicates whether the conversion succeeded or failed.
             </summary>
             <param name="s">A string that contains a number to convert.</param>
@@ -184,15 +340,15 @@
         </member>
         <member name="M:Innovative.Geometry.Angle.CompareTo(System.Object)">
             <summary>
-            Compares this instance with a specified System.Angle object and indicates
+            Compares this instance with a specified object and indicates
             whether this instance precedes, follows, or appears in the same position
             as the specified System.Angle.
             </summary>
-            <param name="obj">The angle to compare with this instance.</param>
+            <param name="obj">The object to compare with this instance.</param>
             <returns>A 32-bit signed integer that indicates whether this instance precedes,
             follows, or appears in the same position as the value parameter. Value 
-            Condition Less than zero This instance precedes obj. Zero This instance
-            has the same position as obj. Greater than zero This instance
+            Condition Less than zero: This instance precedes obj. Zero: This instance
+            has the same position as obj. Greater than zero: This instance
             follows obj or obj is null.</returns>
         </member>
         <member name="M:Innovative.Geometry.Angle.ToString(System.String,System.IFormatProvider)">
@@ -213,8 +369,8 @@
             <param name="other">The angle to compare with this instance.</param>
             <returns>A 32-bit signed integer that indicates whether this instance precedes,
             follows, or appears in the same position as the value parameter. Value 
-            Condition Less than zero This instance precedes obj. Zero This instance
-            has the same position as obj. Greater than zero This instance
+            Condition Less than zero: This instance precedes obj. Zero: This instance
+            has the same position as obj. Greater than zero: This instance
             follows other or other is null.</returns>
         </member>
         <member name="M:Innovative.Geometry.Angle.Equals(Innovative.Geometry.Angle)">
@@ -231,7 +387,7 @@
             this instance in degrees.
             </summary>
         </member>
-        <member name="P:Innovative.Geometry.Angle.ArcMinute">
+        <member name="P:Innovative.Geometry.Angle.Arcminute">
             <summary>
             Gets the arcminute portion of the value of
             this instance in degrees.
@@ -264,6 +420,49 @@
             <summary>
             Represents the empty Angle. This field is read-only.
             </summary>
+        </member>
+        <member name="T:Innovative.Geometry.Numbers">
+            <summary>
+            Provides decimal based mathematical constants.
+            </summary>
+        </member>
+        <member name="P:Innovative.Geometry.Numbers.Pi">
+            <summary>
+            Gets the value of PI.
+            </summary>
+        </member>
+        <member name="T:Innovative.Geometry.Universal">
+            <summary>
+            Provides common .NET static methods that vary between versions.
+            </summary>
+        </member>
+        <member name="T:Innovative.Geometry.Universal.Math">
+            <summary>
+            The Math functions in PORTABLE libraries only accept and return double. All other libraries accept
+            decimal. The library works in all decimal values. This class provides decimal based Math functions
+            for all platforms.
+            </summary>
+        </member>
+        <member name="M:Innovative.Geometry.Universal.Math.Floor(System.Decimal)">
+            <summary>
+            Returns the largest integer less than or equal to the specified double-precision
+            floating-point number.
+            </summary>
+            <param name="value">A decimal floating-point number.</param>
+            <returns>The largest integer less than or equal to d. If d is equal to System.Double.NaN,
+            System.Double.NegativeInfinity, or System.Double.PositiveInfinity, that value
+            is returned.</returns>
+        </member>
+        <member name="M:Innovative.Geometry.Universal.Math.Ceiling(System.Decimal)">
+            <summary>
+            Returns the smallest integral value that is greater than or equal to the
+            specified double-precision floating-point number.
+            </summary>
+            <param name="value">A decimal floating-point number.</param>
+            <returns>The smallest integral value that is greater than or equal to a. If a is equal
+            to System.Double.NaN, System.Double.NegativeInfinity, or System.Double.PositiveInfinity,
+            that value is returned. Note that this method returns a System.Double instead
+            of an integral type.</returns>
         </member>
     </members>
 </doc>

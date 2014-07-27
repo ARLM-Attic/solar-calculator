@@ -17,49 +17,62 @@ using System;
 using System.Data;
 using Innovative.Geometry;
 
-namespace Innovative.SolarCalculator.Tests
+#if NET20
+namespace Innovative.SolarCalculator.Net20.Tests
+#elif NET35
+namespace Innovative.SolarCalculator.Net35.Tests
+#elif NET40
+namespace Innovative.SolarCalculator.Net40.Tests
+#elif NET45
+namespace Innovative.SolarCalculator.Net45.Tests
+#elif NET451
+namespace Innovative.SolarCalculator.Net451.Tests
+#elif PORTABLE40
+namespace Innovative.SolarCalculator.Portable40.Tests
+#elif PORTABLE45
+namespace Innovative.SolarCalculator.Portable40.Tests
+#endif
 {
-    public class TestDirector
-    {
-        /// <summary>
-        /// Specifies the precision when comparing data values of type double
-        /// for math comparison tests.
-        /// </summary>		
-		public static double MathDoubleDelta
+	public class TestDirector
+	{
+		/// <summary>
+		/// Specifies the precision when comparing data values of type decimal
+		/// for Excel comparison tests.
+		/// </summary>
+		public static decimal ExcelDecimalDelta
 		{
 			get
 			{
-				// ***   1234567890123
-				return 0.0000000000001;
+				// ***   12345678901234567890
+				return 0.000000000001M;
 			}
 		}
 
-        /// <summary>
-        /// Specifies the precision when comparing data values of type double
-        /// for Excel comparison tests.
-        /// </summary>
-        public static double ExcelDoubleDelta
-        {
-            get
-            {
-				// ***   12345678901234
-				return 0.00000000000001;
-            }
-        }
+		/// <summary>
+		/// Specifies the precision when comparing data values of type decimal
+		/// for solar comparison tests.
+		/// </summary>
+		public static decimal SolarDecimalDelta
+		{
+			get
+			{
+				// ***   12345678901234567890
+				return 0.000000009M;
+			}
+		}
 
-        /// <summary>
-        /// Specifies the precision when comparing data values of type double
-        /// for solar comparison tests.
-        /// </summary>
-        public static double SolarDoubleDelta
-        {
-            get
-            {
-				//return 0.0000000000004;
-				// ***   1234567890123
-				return 0.000009;
-            }
-        }
+		/// <summary>
+		/// Specifies the precision when comparing data values of type decimal
+		/// for solar comparison tests.
+		/// </summary>
+		public static decimal CSharpExcelDecimalDelta
+		{
+			get
+			{
+				// ***   12345678901234567890
+				return 0.000000001M;
+			}
+		}
 
 		/// <summary>
 		/// Specifies the number of seconds allowed for variation in a
@@ -80,7 +93,7 @@ namespace Innovative.SolarCalculator.Tests
 		/// Creates a SolarTimes instance for use in tests.
 		/// </summary>
 		public static SolarTimes SolarTimesInstance(DataRow dataRow)
-        {
+		{
 			SolarTimes returnValue = null;
 
 			if (dataRow.Table.Columns.Contains("Date") &&
@@ -107,5 +120,5 @@ namespace Innovative.SolarCalculator.Tests
 
 			return returnValue;
 		}
-    }
+	}
 }

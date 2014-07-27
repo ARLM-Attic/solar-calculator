@@ -1,49 +1,334 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator", "Innovative.SolarCalculator\Innovative.SolarCalculator.csproj", "{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Portable40", "Innovative.SolarCalculator\Innovative.SolarCalculator.Portable40.csproj", "{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Tests", "Innovative.SolarCalculator.Tests\Innovative.SolarCalculator.Tests.csproj", "{C07CE1CD-32DE-4567-BD96-FE385E1304DD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Portable40.Tests", "Innovative.SolarCalculator.Tests\Innovative.SolarCalculator.Portable40.Tests.csproj", "{C07CE1CD-32DE-4567-BD96-FE385E1304DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo Console", "Demo Console\Demo Console.csproj", "{9B942A63-80ED-4340-A4FA-264012B91F4C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net20", "Innovative.SolarCalculator.Net20\Innovative.SolarCalculator.Net20.csproj", "{3200097F-EF45-4168-A590-ECCFFB9106C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net20", "Net20", "{51E1DB4B-975F-40AE-BC2D-766D2A48C775}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net35", "Net35", "{CBD3355A-D371-448B-BA87-37CA0E04863B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net40", "Net40", "{A557EB03-10B4-4BE4-8023-601717E2B05E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net45", "Net45", "{2D8C87E8-BEA4-4E34-A980-0C5D2F13DCD8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net451", "Net451", "{E077CCF9-77C2-4DE9-A94A-1CFD9016FE83}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable40", "Portable40", "{8DEEBB6D-445A-4E6C-9937-DB0F39D59CB2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Portable45", "Portable45", "{BE46B414-0085-4A50-839A-9F1901575743}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinRT81", "WinRT81", "{39F2D901-1CD4-4A42-948A-DDF65EB09628}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net35", "Innovative.SolarCalculator.Net35\Innovative.SolarCalculator.Net35.csproj", "{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net40", "Innovative.SolarCalculator.Net40\Innovative.SolarCalculator.Net40.csproj", "{5D2A956F-5C27-4591-A780-F304F91E9B3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net45", "Innovative.SolarCalculator.Net45\Innovative.SolarCalculator.Net45.csproj", "{76E20630-6AF4-40D1-8058-DDE5829BA22A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net451", "Innovative.SolarCalculator.Net451\Innovative.SolarCalculator.Net451.csproj", "{AEF9F0D6-F51D-4390-903E-B8F88E090064}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Portable45", "Innovative.SolarCalculator.Portable45\Innovative.SolarCalculator.Portable45.csproj", "{E0032C9E-16BD-4D72-8751-0A3EA206F155}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.WinRT81", "Innovative.SolarCalculator.WinRT81\Innovative.SolarCalculator.WinRT81.csproj", "{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Innovative.SolarCalculator.Shared", "Innovative.SolarCalculator.Shared\Innovative.SolarCalculator.Shared.shproj", "{BAB7973F-1839-490D-8E11-4B61DA25376A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net20.Tests", "Innovative.SolarCalculator.Net20.Tests\Innovative.SolarCalculator.Net20.Tests.csproj", "{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net35.Tests", "Innovative.SolarCalculator.Net35.Tests\Innovative.SolarCalculator.Net35.Tests.csproj", "{020B35B9-CEE1-43FC-B384-C4F01F08F562}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net40.Tests", "Innovative.SolarCalculator.Net40.Tests\Innovative.SolarCalculator.Net40.Tests.csproj", "{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net45.Tests", "Innovative.SolarCalculator.Net45.Tests\Innovative.SolarCalculator.Net45.Tests.csproj", "{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Net451.Tests", "Innovative.SolarCalculator.Net451.Tests\Innovative.SolarCalculator.Net451.Tests.csproj", "{960BD49C-5D43-46F6-A0DC-E8433CDE893B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innovative.SolarCalculator.Portable45.Tests", "Innovative.SolarCalculator.Portable45.Tests\Innovative.SolarCalculator.Portable45.Tests.csproj", "{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Innovative.SolarCalculator.Shared\Innovative.SolarCalculator.Shared.projitems*{bab7973f-1839-490d-8e11-4b61da25376a}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
+		SccNumberOfProjects = 19
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs35
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = Demo\u0020Console\\Demo\u0020Console.csproj
 		SccProjectName1 = Demo\u0020Console
 		SccLocalPath1 = Demo\u0020Console
-		SccProjectUniqueName2 = Innovative.SolarCalculator.Tests\\Innovative.SolarCalculator.Tests.csproj
-		SccProjectName2 = Innovative.SolarCalculator.Tests
-		SccLocalPath2 = Innovative.SolarCalculator.Tests
-		SccProjectUniqueName3 = Innovative.SolarCalculator\\Innovative.SolarCalculator.csproj
+		SccProjectUniqueName2 = Innovative.SolarCalculator.Net20\\Innovative.SolarCalculator.Net20.csproj
+		SccProjectTopLevelParentUniqueName2 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName2 = Innovative.SolarCalculator.Net20
+		SccLocalPath2 = Innovative.SolarCalculator.Net20
+		SccProjectUniqueName3 = Innovative.SolarCalculator\\Innovative.SolarCalculator.Portable40.csproj
+		SccProjectTopLevelParentUniqueName3 = Innovative.SolarCalculator\u0020Solution.sln
 		SccProjectName3 = Innovative.SolarCalculator
 		SccLocalPath3 = Innovative.SolarCalculator
+		SccProjectUniqueName4 = Innovative.SolarCalculator.Tests\\Innovative.SolarCalculator.Portable40.Tests.csproj
+		SccProjectTopLevelParentUniqueName4 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName4 = Innovative.SolarCalculator.Tests
+		SccLocalPath4 = Innovative.SolarCalculator.Tests
+		SccProjectUniqueName5 = Innovative.SolarCalculator.Net35\\Innovative.SolarCalculator.Net35.csproj
+		SccProjectTopLevelParentUniqueName5 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName5 = Innovative.SolarCalculator.Net35
+		SccLocalPath5 = Innovative.SolarCalculator.Net35
+		SccProjectUniqueName6 = Innovative.SolarCalculator.Net40\\Innovative.SolarCalculator.Net40.csproj
+		SccProjectTopLevelParentUniqueName6 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName6 = Innovative.SolarCalculator.Net40
+		SccLocalPath6 = Innovative.SolarCalculator.Net40
+		SccProjectUniqueName7 = Innovative.SolarCalculator.Net45\\Innovative.SolarCalculator.Net45.csproj
+		SccProjectTopLevelParentUniqueName7 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName7 = Innovative.SolarCalculator.Net45
+		SccLocalPath7 = Innovative.SolarCalculator.Net45
+		SccProjectUniqueName8 = Innovative.SolarCalculator.Net451\\Innovative.SolarCalculator.Net451.csproj
+		SccProjectTopLevelParentUniqueName8 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName8 = Innovative.SolarCalculator.Net451
+		SccLocalPath8 = Innovative.SolarCalculator.Net451
+		SccProjectUniqueName9 = Innovative.SolarCalculator.Portable45\\Innovative.SolarCalculator.Portable45.csproj
+		SccProjectTopLevelParentUniqueName9 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName9 = Innovative.SolarCalculator.Portable45
+		SccLocalPath9 = Innovative.SolarCalculator.Portable45
+		SccProjectUniqueName10 = Innovative.SolarCalculator.WinRT81\\Innovative.SolarCalculator.WinRT81.csproj
+		SccProjectTopLevelParentUniqueName10 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName10 = Innovative.SolarCalculator.WinRT81
+		SccLocalPath10 = Innovative.SolarCalculator.WinRT81
+		SccProjectUniqueName11 = Innovative.SolarCalculator.Shared\\Innovative.SolarCalculator.Shared.shproj
+		SccProjectName11 = Innovative.SolarCalculator.Shared
+		SccLocalPath11 = Innovative.SolarCalculator.Shared
+		SccProjectUniqueName12 = Innovative.SolarCalculator.Shared\\Innovative.SolarCalculator.Shared.projitems
+		SccProjectTopLevelParentUniqueName12 = Innovative.SolarCalculator.Shared\\Innovative.SolarCalculator.Shared.shproj
+		SccProjectName12 = Innovative.SolarCalculator.Shared
+		SccLocalPath12 = Innovative.SolarCalculator.Shared
+		SccProjectUniqueName13 = Innovative.SolarCalculator.Net20.Tests\\Innovative.SolarCalculator.Net20.Tests.csproj
+		SccProjectTopLevelParentUniqueName13 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName13 = Innovative.SolarCalculator.Net20.Tests
+		SccLocalPath13 = Innovative.SolarCalculator.Net20.Tests
+		SccProjectUniqueName14 = Innovative.SolarCalculator.Net35.Tests\\Innovative.SolarCalculator.Net35.Tests.csproj
+		SccProjectTopLevelParentUniqueName14 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName14 = Innovative.SolarCalculator.Net35.Tests
+		SccLocalPath14 = Innovative.SolarCalculator.Net35.Tests
+		SccProjectUniqueName15 = Innovative.SolarCalculator.Net40.Tests\\Innovative.SolarCalculator.Net40.Tests.csproj
+		SccProjectTopLevelParentUniqueName15 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName15 = Innovative.SolarCalculator.Net40.Tests
+		SccLocalPath15 = Innovative.SolarCalculator.Net40.Tests
+		SccProjectUniqueName16 = Innovative.SolarCalculator.Net45.Tests\\Innovative.SolarCalculator.Net45.Tests.csproj
+		SccProjectTopLevelParentUniqueName16 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName16 = Innovative.SolarCalculator.Net45.Tests
+		SccLocalPath16 = Innovative.SolarCalculator.Net45.Tests
+		SccProjectUniqueName17 = Innovative.SolarCalculator.Net451.Tests\\Innovative.SolarCalculator.Net451.Tests.csproj
+		SccProjectTopLevelParentUniqueName17 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName17 = Innovative.SolarCalculator.Net451.Tests
+		SccLocalPath17 = Innovative.SolarCalculator.Net451.Tests
+		SccProjectUniqueName18 = Innovative.SolarCalculator.Portable45.Tests\\Innovative.SolarCalculator.Portable45.Tests.csproj
+		SccProjectTopLevelParentUniqueName18 = Innovative.SolarCalculator\u0020Solution.sln
+		SccProjectName18 = Innovative.SolarCalculator.Portable45.Tests
+		SccLocalPath18 = Innovative.SolarCalculator.Portable45.Tests
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Release|ARM.ActiveCfg = Release|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Release|x64.ActiveCfg = Release|Any CPU
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB}.Release|x86.ActiveCfg = Release|Any CPU
 		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Release|x64.ActiveCfg = Release|Any CPU
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD}.Release|x86.ActiveCfg = Release|Any CPU
 		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Release|x64.ActiveCfg = Release|Any CPU
+		{9B942A63-80ED-4340-A4FA-264012B91F4C}.Release|x86.ActiveCfg = Release|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Release|x64.ActiveCfg = Release|Any CPU
+		{3200097F-EF45-4168-A590-ECCFFB9106C3}.Release|x86.ActiveCfg = Release|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Release|x64.ActiveCfg = Release|Any CPU
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Release|x64.ActiveCfg = Release|Any CPU
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C}.Release|x86.ActiveCfg = Release|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Release|x64.ActiveCfg = Release|Any CPU
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A}.Release|x86.ActiveCfg = Release|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Release|ARM.ActiveCfg = Release|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Release|x64.ActiveCfg = Release|Any CPU
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Release|ARM.ActiveCfg = Release|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Release|x64.ActiveCfg = Release|Any CPU
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155}.Release|x86.ActiveCfg = Release|Any CPU
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Debug|ARM.Build.0 = Debug|ARM
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Debug|x64.ActiveCfg = Debug|x64
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Debug|x64.Build.0 = Debug|x64
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Debug|x86.ActiveCfg = Debug|x86
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Debug|x86.Build.0 = Debug|x86
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Release|ARM.ActiveCfg = Release|ARM
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Release|ARM.Build.0 = Release|ARM
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Release|x64.ActiveCfg = Release|x64
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Release|x64.Build.0 = Release|x64
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Release|x86.ActiveCfg = Release|x86
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261}.Release|x86.Build.0 = Release|x86
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Release|x64.ActiveCfg = Release|Any CPU
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3}.Release|x86.ActiveCfg = Release|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Release|ARM.ActiveCfg = Release|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Release|x64.ActiveCfg = Release|Any CPU
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562}.Release|x86.ActiveCfg = Release|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Release|x64.ActiveCfg = Release|Any CPU
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88}.Release|x86.ActiveCfg = Release|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Release|ARM.ActiveCfg = Release|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Release|x64.ActiveCfg = Release|Any CPU
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B}.Release|x86.ActiveCfg = Release|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Release|ARM.ActiveCfg = Release|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Release|x64.ActiveCfg = Release|Any CPU
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7FC2A825-67F0-42F3-AE24-8A216A85B5FB} = {8DEEBB6D-445A-4E6C-9937-DB0F39D59CB2}
+		{C07CE1CD-32DE-4567-BD96-FE385E1304DD} = {8DEEBB6D-445A-4E6C-9937-DB0F39D59CB2}
+		{3200097F-EF45-4168-A590-ECCFFB9106C3} = {51E1DB4B-975F-40AE-BC2D-766D2A48C775}
+		{C05FB064-E616-43F7-9DBC-E9F0EBC6B6C5} = {CBD3355A-D371-448B-BA87-37CA0E04863B}
+		{5D2A956F-5C27-4591-A780-F304F91E9B3C} = {A557EB03-10B4-4BE4-8023-601717E2B05E}
+		{76E20630-6AF4-40D1-8058-DDE5829BA22A} = {2D8C87E8-BEA4-4E34-A980-0C5D2F13DCD8}
+		{AEF9F0D6-F51D-4390-903E-B8F88E090064} = {E077CCF9-77C2-4DE9-A94A-1CFD9016FE83}
+		{E0032C9E-16BD-4D72-8751-0A3EA206F155} = {BE46B414-0085-4A50-839A-9F1901575743}
+		{BAAFA89F-FC40-4732-8EE6-4DA99ABFC261} = {39F2D901-1CD4-4A42-948A-DDF65EB09628}
+		{1ACCD209-2D63-49A8-854A-57B8EFC6A9A3} = {51E1DB4B-975F-40AE-BC2D-766D2A48C775}
+		{020B35B9-CEE1-43FC-B384-C4F01F08F562} = {CBD3355A-D371-448B-BA87-37CA0E04863B}
+		{057C5D5F-1F1B-4453-BDE8-E6B7F3D7CDC3} = {A557EB03-10B4-4BE4-8023-601717E2B05E}
+		{9A9A30DF-F7CF-4480-BE58-221F8DA77F88} = {2D8C87E8-BEA4-4E34-A980-0C5D2F13DCD8}
+		{960BD49C-5D43-46F6-A0DC-E8433CDE893B} = {E077CCF9-77C2-4DE9-A94A-1CFD9016FE83}
+		{898D3A7B-356E-4F87-90CD-C1F7C6EBE2D8} = {BE46B414-0085-4A50-839A-9F1901575743}
 	EndGlobalSection
 EndGlobal

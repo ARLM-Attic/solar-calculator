@@ -25,8 +25,8 @@ namespace Innovative.SolarCalculator
 	{
 		private DateTimeOffset _forDate = DateTimeOffset.MinValue;
 		private Angle _atmosphericRefraction = new Angle(0.833d);
-		private Angle _longitude = 0d;
-		private Angle _latitude = 0d;
+		private Angle _longitude = Angle.Empty;
+		private Angle _latitude = Angle.Empty;
 
 		#region Contructors
 		/// <summary>
@@ -106,7 +106,7 @@ namespace Innovative.SolarCalculator
 			}
 			set
 			{
-				if (value >= -180d && value <= 180d)
+				if (value >= -180M && value <= 180M)
 				{
 					_longitude = value;
 				}
@@ -132,7 +132,7 @@ namespace Innovative.SolarCalculator
 			}
 			set
 			{
-				if (value >= -90d && value <= 90d)
+				if (value >= -90M && value <= 90M)
 				{
 					_latitude = value;
 				}
@@ -150,11 +150,11 @@ namespace Innovative.SolarCalculator
 		/// For example, Mountain Standard Time (MST) in the US is 7 hours behind UTC (MST = UTC - 7).
 		/// (Spreadsheet Column B, Row 5)
 		/// </summary>
-		public double TimeZoneOffset
+		public decimal TimeZoneOffset
 		{
 			get
 			{
-				return this.ForDate.Offset.TotalHours;
+				return (decimal)this.ForDate.Offset.TotalHours;
 			}
 		}
 
@@ -168,8 +168,8 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4d / 1440d;
-				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
+				decimal dayFraction = (decimal)this.SolarNoon.TimeOfDay.TotalDays - this.HourAngleSunrise * 4M / 1440M;
+				returnValue = this.ForDate.Date.Add(DecimalTimeSpan.FromDays(dayFraction));
 
 				return returnValue;
 			}
@@ -185,8 +185,8 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.MinValue;
 
-				double dayFraction = this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4d / 1440d;
-				returnValue = this.ForDate.Date.Add(TimeSpan.FromDays(dayFraction));
+				decimal dayFraction = (decimal)this.SolarNoon.TimeOfDay.TotalDays + this.HourAngleSunrise * 4M / 1440M;
+				returnValue = this.ForDate.Date.Add(DecimalTimeSpan.FromDays(dayFraction));
 
 				return returnValue;
 			}
@@ -216,16 +216,20 @@ namespace Innovative.SolarCalculator
 		/// Time past local midnight.
 		/// (Spreadsheet Column E)
 		/// </summary>	
-		public double TimePastLocalMidnight
+		public decimal TimePastLocalMidnight
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
 				// ***
 				// *** .1 / 24
 				// ***
+#if NET20
+				returnValue = DateTimeExtensions.ToOleAutomationDate(DateTime.Parse("12/30/1899  12:00:00 AM").Add(this.ForDate.TimeOfDay));
+#else
 				returnValue = DateTime.Parse("12/30/1899  12:00:00 AM").Add(this.ForDate.TimeOfDay).ToOleAutomationDate();
+#endif
 
 				return returnValue;
 			}
@@ -238,16 +242,16 @@ namespace Innovative.SolarCalculator
 		/// to mean the numerical day of the current year, where January 1 is defined as day 001. 
 		/// (Spreadsheet Column F)
 		/// </summary>
-		public double JulianDay
+		public decimal JulianDay
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
 				// ***
 				// *** this.TimePastLocalMidnight was removed since the time is in ForDate
 				// ***
-				returnValue = ExcelFormulae.ToExcelDateValue(this.ForDate.Date) + 2415018.5d - (this.TimeZoneOffset / 24d);
+				returnValue = ExcelFormulae.ToExcelDateValue(this.ForDate.Date) + 2415018.5M - (this.TimeZoneOffset / 24M);
 
 				return returnValue;
 			}
@@ -261,13 +265,13 @@ namespace Innovative.SolarCalculator
 		/// for past errors by skipping 10 days in October of 1582. 
 		/// (Spreadsheet Column G)
 		/// </summary>
-		public double JulianCentury
+		public decimal JulianCentury
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
-				returnValue = (this.JulianDay - 2451545d) / 36525d;
+				returnValue = (this.JulianDay - 2451545M) / 36525M;
 
 				return returnValue;
 			}
@@ -281,9 +285,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				Angle returnValue = 0d;
+				Angle returnValue = Angle.Empty;
 
-				returnValue = new Angle(ExcelFormulae.Mod(280.46646d + this.JulianCentury * (36000.76983d + this.JulianCentury * 0.0003032d), 360d));
+				returnValue = new Angle(ExcelFormulae.Mod(280.46646M + this.JulianCentury * (36000.76983M + this.JulianCentury * 0.0003032M), 360M));
 
 				return returnValue;
 			}
@@ -297,9 +301,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				Angle returnValue = 0d;
+				Angle returnValue = Angle.Empty;
 
-				returnValue = new Angle(357.52911d + this.JulianCentury * (35999.05029d - 0.0001537d * this.JulianCentury));
+				returnValue = new Angle(357.52911M + this.JulianCentury * (35999.05029M - 0.0001537M * this.JulianCentury));
 
 				return returnValue;
 			}
@@ -311,13 +315,13 @@ namespace Innovative.SolarCalculator
 		/// between 0 and 1 is elliptic.
 		/// (Spreadsheet Column K)
 		/// </summary>
-		public double EccentricityOfEarthOrbit
+		public decimal EccentricityOfEarthOrbit
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
-				returnValue = 0.016708634d - this.JulianCentury * (0.000042037d + 0.0000001267d * this.JulianCentury);
+				returnValue = 0.016708634M - this.JulianCentury * (0.000042037M + 0.0000001267M * this.JulianCentury);
 
 				return returnValue;
 			}
@@ -331,9 +335,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				Angle returnValue = 0d;
+				Angle returnValue = Angle.Empty;
 
-				returnValue = new Angle(Math.Sin(this.SunMeanAnomaly.Radians) * (1.914602d - this.JulianCentury * (0.004817d + 0.000014d * this.JulianCentury)) + Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(2d)) * (0.019993d - 0.000101d * JulianCentury) + Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(3d)) * 0.000289d);
+				returnValue = new Angle(Universal.Math.Sin(this.SunMeanAnomaly.Radians) * (1.914602M - this.JulianCentury * (0.004817M + 0.000014M * this.JulianCentury)) + Universal.Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(2M)) * (0.019993M - 0.000101M * JulianCentury) + Universal.Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(3M)) * 0.000289M);
 
 				return returnValue;
 			}
@@ -347,9 +351,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				Angle returnValue = 0d;
+				Angle returnValue = Angle.Empty;
 
-				returnValue = new Angle(this.SunGeometricMeanLongitude + this.SunEquationOfCenter);
+				returnValue = this.SunGeometricMeanLongitude + this.SunEquationOfCenter;
 
 				return returnValue;
 			}
@@ -363,10 +367,10 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				Angle returnValue = 0d;
+				Angle returnValue = Angle.Empty;
 
-				Angle a1 = new Angle(125.04d - 1934.136d * this.JulianCentury);
-				returnValue = new Angle(this.SunTrueLongitude - 0.00569d - 0.00478d * Math.Sin(a1.Radians));
+				Angle a1 = new Angle(125.04M - 1934.136M * this.JulianCentury);
+				returnValue = new Angle((decimal)(this.SunTrueLongitude - 0.00569M - 0.00478M * Universal.Math.Sin(a1.Radians)));
 
 				return returnValue;
 			}
@@ -384,30 +388,9 @@ namespace Innovative.SolarCalculator
 
 				// ***
 				// *** Formula 22.3 from Page 147 of Astronomical Algorithms, Second Edition (Jean Meeus)
-				// ***
-				//double u = this.JulianCentury / 100d;
-				//Angle a1 = new Angle(23, 26, 21.448d);
-				//Angle a2 = new Angle(0, 4680, .93d);
-
-				//returnValue = new Angle
-				//			(
-				//				a1
-				//			  - (a2 * u)
-				//			  - (1.55d * Math.Pow(u, 2))
-				//			  + (1999.25d * Math.Pow(u, 3))
-				//			  - (51.38d * Math.Pow(u, 4))
-				//			  - (249.67d * Math.Pow(u, 5))
-				//			  - (39.05d * Math.Pow(u, 6))
-				//			  + (7.12d * Math.Pow(u, 7))
-				//			  + (27.87d * Math.Pow(u, 8))
-				//			  + (5.79d * Math.Pow(u, 9))
-				//			  + (2.45d * Math.Pow(u, 10))
-				//			);
-
-				// ***
 				// *** Original spreadsheet formula based on 22.2 same page of book
 				// ***
-				returnValue = 23d + (26d + ((21.448d - this.JulianCentury * (46.815d + this.JulianCentury * (0.00059d - this.JulianCentury * 0.001813d)))) / 60d) / 60d;
+				returnValue = 23M + (26M + ((21.448M - this.JulianCentury * (46.815M + this.JulianCentury * (0.00059M - this.JulianCentury * 0.001813M)))) / 60M) / 60M;
 
 				return returnValue;
 			}
@@ -421,10 +404,10 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				Angle returnValue = 0d;
+				Angle returnValue = Angle.Empty;
 
-				Angle a1 = 125.04d - 1934.136d * this.JulianCentury;
-				returnValue = new Angle(this.MeanEclipticObliquity + 0.00256d * Math.Cos(a1.Radians));
+				Angle a1 = 125.04M - 1934.136M * this.JulianCentury;
+				returnValue = new Angle((decimal)(this.MeanEclipticObliquity + 0.00256M * Universal.Math.Cos(a1.Radians)));
 
 				return returnValue;
 			}
@@ -440,9 +423,9 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
-				double radians = Math.Asin(Math.Sin(this.ObliquityCorrection.Radians) * Math.Sin(this.SunApparentLongitude.Radians));
+				decimal radians = Universal.Math.Asin(Universal.Math.Sin(this.ObliquityCorrection.Radians) * Universal.Math.Sin(this.SunApparentLongitude.Radians));
 				returnValue = Angle.FromRadians(radians);
 
 				return returnValue;
@@ -453,13 +436,13 @@ namespace Innovative.SolarCalculator
 		/// Var Y
 		/// (Spreadsheet Column U)
 		/// </summary>
-		public double VarY
+		public decimal VarY
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
-				returnValue = Math.Tan(this.ObliquityCorrection.RadiansDivided(2d)) * Math.Tan(this.ObliquityCorrection.RadiansDivided(2d));
+				returnValue = Universal.Math.Tan(this.ObliquityCorrection.RadiansDivided(2M)) * Universal.Math.Tan(this.ObliquityCorrection.RadiansDivided(2M));
 
 				return returnValue;
 			}
@@ -471,13 +454,13 @@ namespace Innovative.SolarCalculator
 		/// elliptical orbit and Kepler's law of equal areas in equal times are the culprits behind this phenomenon.
 		/// (Spreadsheet Column V)
 		/// </summary>
-		public double EquationOfTime
+		public decimal EquationOfTime
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
-				returnValue = 4d * Angle.ToDegrees(this.VarY * Math.Sin(2d * this.SunGeometricMeanLongitude.Radians) - 2d * this.EccentricityOfEarthOrbit * Math.Sin(this.SunMeanAnomaly.Radians) + 4d * this.EccentricityOfEarthOrbit * this.VarY * Math.Sin(this.SunMeanAnomaly.Radians) * Math.Cos(2d * this.SunGeometricMeanLongitude.Radians) - 0.5d * this.VarY * this.VarY * Math.Sin(4d * this.SunGeometricMeanLongitude.Radians) - 1.25d * this.EccentricityOfEarthOrbit * this.EccentricityOfEarthOrbit * Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(2d)));
+				returnValue = 4M * Angle.ToDegrees(this.VarY * Universal.Math.Sin(2M * this.SunGeometricMeanLongitude.Radians) - 2M * this.EccentricityOfEarthOrbit * Universal.Math.Sin(this.SunMeanAnomaly.Radians) + 4M * this.EccentricityOfEarthOrbit * this.VarY * Universal.Math.Sin(this.SunMeanAnomaly.Radians) * Universal.Math.Cos(2M * this.SunGeometricMeanLongitude.Radians) - 0.5M * this.VarY * this.VarY * Universal.Math.Sin(4M * this.SunGeometricMeanLongitude.Radians) - 1.25M * this.EccentricityOfEarthOrbit * this.EccentricityOfEarthOrbit * Universal.Math.Sin(this.SunMeanAnomaly.RadiansMultiplied(2M)));
 
 				return returnValue;
 			}
@@ -491,10 +474,10 @@ namespace Innovative.SolarCalculator
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
 				Angle a1 = 90d + this.AtmosphericRefraction;
-				double radians = Math.Acos(Math.Cos(a1.Radians) / (Math.Cos(this.Latitude.Radians) * Math.Cos(this.SolarDeclination.Radians)) - Math.Tan(this.Latitude.Radians) * Math.Tan(this.SolarDeclination.Radians));
+				decimal radians = Universal.Math.Acos(Universal.Math.Cos(a1.Radians) / (Universal.Math.Cos(this.Latitude.Radians) * Universal.Math.Cos(this.SolarDeclination.Radians)) - Universal.Math.Tan(this.Latitude.Radians) * Universal.Math.Tan(this.SolarDeclination.Radians));
 				returnValue = Angle.FromRadians(radians);
 
 				return returnValue;
@@ -514,8 +497,8 @@ namespace Innovative.SolarCalculator
 			{
 				DateTime returnValue = DateTime.Now.Date;
 
-				double dayFraction = (720d - (4d * this.Longitude) - this.EquationOfTime + (this.TimeZoneOffset * 60d)) / 1440d;
-				returnValue = DateTime.Now.Date.Add(TimeSpan.FromDays(dayFraction));
+				decimal dayFraction = (720M - (4M * this.Longitude) - this.EquationOfTime + (this.TimeZoneOffset * 60M)) / 1440M;
+				returnValue = DateTime.Now.Date.Add(DecimalTimeSpan.FromDays(dayFraction));
 
 				return returnValue;
 			}
@@ -531,7 +514,7 @@ namespace Innovative.SolarCalculator
 			{
 				TimeSpan returnValue = TimeSpan.Zero;
 
-				returnValue = TimeSpan.FromMinutes(8d * this.HourAngleSunrise);
+				returnValue = DecimalTimeSpan.FromMinutes(8M * this.HourAngleSunrise);
 
 				return returnValue;
 			}
@@ -545,7 +528,7 @@ namespace Innovative.SolarCalculator
 		/// <param name="degrees">N/A</param>
 		/// <returns>N/A</returns>
 		[Obsolete("Use Angle.ToRadians() instead.", false)]
-		public double ToRadians(double degrees)
+		public decimal ToRadians(decimal degrees)
 		{
 			return Angle.ToRadians(degrees);
 		}
@@ -556,7 +539,7 @@ namespace Innovative.SolarCalculator
 		/// <param name="radians">N/A</param>
 		/// <returns>N/A</returns>
 		[Obsolete("Use Angle.ToDegrees() instead.", false)]
-		public double ToDegrees(double radians)
+		public decimal ToDegrees(decimal radians)
 		{
 			return Angle.ToDegrees(radians);
 		}
@@ -569,13 +552,13 @@ namespace Innovative.SolarCalculator
 		/// A mean solar day is defined as the time between one solar noon and the next, averaged over the year.
 		/// (Spreadsheet Column AB)
 		/// </summary>
-		public double TrueSolarTime
+		public decimal TrueSolarTime
 		{
 			get
 			{
-				double returnValue = 0d;
+				decimal returnValue = 0M;
 
-				returnValue = ExcelFormulae.Mod(this.TimePastLocalMidnight * 1440d + this.EquationOfTime + 4d * this.Longitude - 60d * this.TimeZoneOffset, 1440d);
+				returnValue = ExcelFormulae.Mod(this.TimePastLocalMidnight * 1440M + this.EquationOfTime + 4M * this.Longitude - 60M * this.TimeZoneOffset, 1440M);
 
 				return returnValue;
 			}

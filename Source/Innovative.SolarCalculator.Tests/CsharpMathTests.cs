@@ -14,9 +14,24 @@
 // *** do not use the software. Full license details can be found at https://solarcalculator.codeplex.com/license.
 // ***
 using System;
+using Innovative.SolarCalculator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Innovative.SolarCalculator.Tests
+#if NET20
+namespace Innovative.SolarCalculator.Net20.Tests
+#elif NET35
+namespace Innovative.SolarCalculator.Net35.Tests
+#elif NET40
+namespace Innovative.SolarCalculator.Net40.Tests
+#elif NET45
+namespace Innovative.SolarCalculator.Net45.Tests
+#elif NET451
+namespace Innovative.SolarCalculator.Net451.Tests
+#elif PORTABLE40
+namespace Innovative.SolarCalculator.Portable40.Tests
+#elif PORTABLE45
+namespace Innovative.SolarCalculator.Portable40.Tests
+#endif
 {
 	/// <summary>
 	/// These tests are to demonstrate the inaccuracy of the Math library in
@@ -35,93 +50,93 @@ namespace Innovative.SolarCalculator.Tests
 		[TestCategory("C# Math Tests")]
 		public void CsharpSquareTest()
 		{
-			double baseNumber = 1.0000001;
-			double expectedValue = 674530.4707;
-			double actualValue = baseNumber;
+			decimal baseNumber = 1.0000001M;
+			decimal expectedValue = 674530.4707M;
+			decimal actualValue = baseNumber;
 
 			for (int i = 0; i < 27; i++)
 			{
 				actualValue = (actualValue * actualValue);
 			}
 
-			double difference = expectedValue - actualValue;
+			decimal difference = expectedValue - actualValue;
 
-			if (difference != 0d)
+			if (difference != 0M)
 			{
-				Assert.Inconclusive("Taking the square of the number {0} 27 times should result in {1}. The actual value ({2}) differs by {3}.", baseNumber, expectedValue, actualValue, difference);
+				Assert.Fail("Taking the square of the number {0} 27 times should result in {1}. The actual value ({2}) differs by {3}.", baseNumber, expectedValue, actualValue, difference);
 			}
 		}
 
 		[TestMethod]
 		[TestCategory("C# Math Tests")]
-		public void BcdMath1Test()
+		public void CsharpBcdMath1Test()
 		{
-			double expectedValue = 0;
-			double actualValue = 2d + .2d + .2d + .2d + .2d + .2d - 3d;
+			decimal expectedValue = 0;
+			decimal actualValue = 2M + .2M + .2M + .2M + .2M + .2M - 3M;
 
-			double difference = expectedValue - actualValue;
+			decimal difference = expectedValue - actualValue;
 
-			if (difference != 0d)
+			if (difference != 0M)
 			{
-				Assert.Inconclusive("The result of the equation 2 + .2d + .2d + .2d + .2d + .2d - 3 should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
+				Assert.Fail("The result of the equation 2 + .2 + .2 + .2 + .2 + .2 - 3 should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
 			}
 		}
 
 		[TestMethod]
 		[TestCategory("C# Math Tests")]
-		public void BcdMath2Test()
+		public void CsharpBcdMath2Test()
 		{
-			double expectedValue = 0;
-			double actualValue = 2d + (5d * .2) - 3d;
+			decimal expectedValue = 0M;
+			decimal actualValue = 2M + (5M * .2M) - 3M;
 
-			double difference = expectedValue - actualValue;
+			decimal difference = expectedValue - actualValue;
 
-			if (difference != 0d)
+			if (difference != 0M)
 			{
-				Assert.Inconclusive("The result of the equation 2 + (5 * .02) - 3 should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
+				Assert.Fail("The result of the equation 2 + (5 * .02) - 3 should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
 			}
 		}
 
 		[TestMethod]
 		[TestCategory("C# Math Tests")]
-		public void LoopIncrementTest()
+		public void CsharpLoopIncrementTest()
 		{
-			double expectedValue = 100d;
-			double actualValue = 0d;
+			decimal expectedValue = 100M;
+			decimal actualValue = 0M;
 
-			for (double i = 0d; i < 100d; i += .1d)
+			for (decimal i = 0M; i < 100M; i += .1M)
 			{
 				actualValue = i;
 			}
 
-			double difference = expectedValue - actualValue;
+			decimal difference = expectedValue - actualValue;
 
-			if (difference != 0d)
+			if (difference != 0M)
 			{
-				Assert.Inconclusive("The result of incrementing a counter from 0 to 100 by .1 should result in {0} after 100 steps. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
+				Assert.Fail("The result of incrementing a counter from 0 to 100 by .1 should result in {0} after 100 steps. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
 			}
 		}
 
 		[TestMethod]
 		[TestCategory("C# Math Tests")]
-		public void OneThirdFractionTest()
+		public void CsharpOneThirdFractionTest()
 		{
-			double expectedValue = 1d;
-			double actualValue = 3d * (1d / 3d);
+			decimal expectedValue = 1M;
+			decimal actualValue = 3M * (1M / 3M);
 
-			double difference = expectedValue - actualValue;
+			decimal difference = expectedValue - actualValue;
 
-			if (difference != 0d)
+			if (difference != 0M)
 			{
-				Assert.Inconclusive("The result of the equation 3 * (1/3) should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
+				Assert.Fail("The result of the equation 3 * (1/3) should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
 			}
 		}
 
 		[TestMethod]
 		[TestCategory("C# Math Tests")]
-		public void OneThousanthMultiplicationTest()
+		public void CsharpOneThousanthMultiplicationTest()
 		{
-			double baseValue = .1;
+			decimal baseValue = .1M;
 			int expectedValue = 100;
 			int actualValue = (int)(1000 * baseValue);
 
@@ -129,42 +144,42 @@ namespace Innovative.SolarCalculator.Tests
 
 			if (difference != 0)
 			{
-				Assert.Inconclusive("The result of the equation 1000 * .1 should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
+				Assert.Fail("The result of the equation 1000 * .1 should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
 			}
 		}
 
 		[TestMethod]
 		[TestCategory("C# Math Tests")]
-		public void NumberOverUnder10Test()
+		public void CsharpNumberOverUnder10Test()
 		{
 			Random rnd = new Random();
-			double a = 100 * rnd.NextDouble();
-			double b = (a/10d);
-			double c = 10d * b;
+			decimal a = 100M * (decimal)rnd.NextDouble();
+			decimal b = (a/10M);
+			decimal c = 10M * b;
 
-			double expectedValue = 0d;
-			double actualValue = (a - c);
+			decimal expectedValue = 0M;
+			decimal actualValue = (a - c);
 
-			double difference = expectedValue - actualValue;
+			decimal difference = expectedValue - actualValue;
 
-			if (difference != 0d)
+			if (difference != 0M)
 			{
-				Assert.Inconclusive("The result of b = (a / 10), c = (10 * b) and (a - c) should be {0} (where a is any number). The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
+				Assert.Fail("The result of b = (a / 10), c = (10 * b) and (a - c) should be {0} (where a is any number). The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
 			}
 		}
 
 		[TestMethod]
 		[TestCategory("C# Math Tests")]
-		public void SquareRootTest()
+		public void CsharpSquareRootTest()
 		{
-			double expectedValue = 0d;
-			double actualValue = Math.Sqrt(25) - 5;
+			decimal expectedValue = 0M;
+			decimal actualValue = Universal.Math.Sqrt(25M) - 5M;
 
-			double difference = expectedValue - actualValue;
+			decimal difference = expectedValue - actualValue;
 
 			if (difference != 0)
 			{
-				Assert.Inconclusive("The result of the equation SQRT(25) - 5 should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
+				Assert.Fail("The result of the equation SQRT(25) - 5 should be {0}. The actual value ({1}) differs by {2}.", expectedValue, actualValue, difference);
 			}
 		}
 	}

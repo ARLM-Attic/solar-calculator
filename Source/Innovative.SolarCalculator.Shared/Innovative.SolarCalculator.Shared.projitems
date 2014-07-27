@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="SharedProjectFile_SccProperties">
+    <SharedProjectFile_ProjectGuid>{fff1530d-5751-46e3-863e-aa0c94adcf6f}</SharedProjectFile_ProjectGuid>
+    <SharedProjectFile_SccProjectName>SAK</SharedProjectFile_SccProjectName>
+    <SharedProjectFile_SccAuxPath>SAK</SharedProjectFile_SccAuxPath>
+    <SharedProjectFile_SccLocalPath>SAK</SharedProjectFile_SccLocalPath>
+    <SharedProjectFile_SccProvider>SAK</SharedProjectFile_SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>bab7973f-1839-490d-8e11-4b61da25376a</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>App1</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)SolarCalculator.1.0.8.nupkg" />
+  </ItemGroup>
+</Project>

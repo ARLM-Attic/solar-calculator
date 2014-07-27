@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Innovative.SolarCalculator
 {
@@ -21,19 +18,27 @@ namespace Innovative.SolarCalculator
 		/// </summary>
 		/// <param name="value">A DateTime value that will be converted to the DateValue.</param>
 		/// <returns>Gets a value that represents the Excel DateValue for the given DateTime value.</returns>
-		public static double ToExcelDateValue(DateTime value)
+		public static decimal ToExcelDateValue(DateTime value)
 		{
-			double returnValue = 0;
+			decimal returnValue = 0;
 
 			if (value.Date <= DateTime.Parse("1/1/1900"))
 			{
-				double d = value.ToOleAutomationDate();
-				double c = Math.Floor(d);
-				returnValue = 1 + (d - c);
+#if NET20
+				decimal d = DateTimeExtensions.ToOleAutomationDate(value);
+#else
+				decimal d = value.ToOleAutomationDate();
+#endif
+				decimal c = (decimal)Math.Floor((double)d);
+				returnValue = 1M + (d - c);
 			}
 			else
 			{
+#if NET20
+				returnValue = DateTimeExtensions.ToOleAutomationDate(value);
+#else
 				returnValue = value.ToOleAutomationDate();
+#endif
 			}
 
 			return returnValue;
@@ -48,13 +53,13 @@ namespace Innovative.SolarCalculator
 		/// <param name="number">The numeric value whose remainder you wish to find.</param>
 		/// <param name="divisor">The number used to divide the number parameter. If the divisor is 0</param>
 		/// <returns></returns>
-		public static double Mod(double number, double divisor)
+		public static decimal Mod(decimal number, decimal divisor)
 		{
-			double returnValue = 0.0;
+			decimal returnValue = 0M;
 
-			if (divisor != 0.0)
+			if (divisor != 0M)
 			{
-				returnValue = number - divisor * Math.Floor(number / divisor);
+				returnValue = number - divisor * (decimal)Math.Floor((double)(number / divisor));
 			}
 			else
 			{
